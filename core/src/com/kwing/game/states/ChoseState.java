@@ -3,9 +3,11 @@ package com.kwing.game.states;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.Ship;
 import com.kwing.game.entities.menu.MenuBackground;
 import com.kwing.game.handlers.GameStateManager;
@@ -18,6 +20,7 @@ public class ChoseState extends GameState {
 	private ArrayList<Ship> ships;
 	
 	private BitmapFont font12;
+	private Music startGameMusic;
 
 	
 	public ChoseState(GameStateManager gsm) {
@@ -38,6 +41,11 @@ public class ChoseState extends GameState {
 		parameter.size = 48;
 		font12 = generator.generateFont(parameter); // font size 12 pixels
 		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		
+		startGameMusic = Resources.Sounds.getLevel();
+		startGameMusic.play();
+		startGameMusic.setLooping(true);
+		startGameMusic.setVolume(0.3f);
 
 	}
 

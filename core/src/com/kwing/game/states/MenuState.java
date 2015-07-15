@@ -2,9 +2,8 @@ package com.kwing.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.audio.Music;
+import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.menu.Menu;
 import com.kwing.game.entities.menu.MenuBackground;
 import com.kwing.game.handlers.GameStateManager;
@@ -13,8 +12,7 @@ public class MenuState extends GameState {
 	
 	private MenuBackground menuBG;
 	private Menu menu;
-	
-	
+	private Music intro;
 	private boolean leftPressed;
 	
 	public MenuState(GameStateManager gsm){
@@ -25,6 +23,11 @@ public class MenuState extends GameState {
 	public void init() {
 		menuBG = new MenuBackground();
 		menu = new Menu(cam);
+		
+		intro = Resources.Sounds.getIntro();
+		intro.play();
+		intro.setLooping(true);
+	
 	}
 
 	@Override
@@ -39,6 +42,8 @@ public class MenuState extends GameState {
 			gsm.addState(GameStateManager.CHOSESTATE);
 			gsm.setState(GameStateManager.CHOSESTATE);
 			menu.setState(false);
+			
+			intro.stop();
 		}
 	}
 
@@ -58,6 +63,7 @@ public class MenuState extends GameState {
 	@Override
 	public void dispose() {
 		this.dispose();
+		intro.dispose();
 	}
 
 	public Menu getMenu() {
