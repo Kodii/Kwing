@@ -32,9 +32,9 @@ public class ChoseState extends GameState {
 		menuBG = new MenuBackground();
 		
 		ships = new ArrayList<Ship>();
-		ships.add(new Ship("PNG/playerShip1_blue.png", 99, 75, 150, (Game.V_HEIGHT / 2 - 30) - 75 / 2, cam));
-		ships.add(new Ship("PNG/playerShip2_blue.png", 99, 75, Game.V_WIDTH / 2 - 99 / 2, (Game.V_HEIGHT / 2 - 30) - 75 / 2, cam));
-		ships.add(new Ship("PNG/playerShip3_blue.png", 99, 75, Game.V_WIDTH - 150 - 99, (Game.V_HEIGHT / 2 - 30) - 75 / 2, cam));
+		ships.add(new Ship(Resources.Textures.getPlayerShipBlue1(), 99, 75, 150, (Game.V_HEIGHT / 2 - 30) - 75 / 2, cam));
+		ships.add(new Ship(Resources.Textures.getPlayerShipBlue2(), 99, 75, Game.V_WIDTH / 2 - 99 / 2, (Game.V_HEIGHT / 2 - 30) - 75 / 2, cam));
+		ships.add(new Ship(Resources.Textures.getPlayerShipBlue3(), 99, 75, Game.V_WIDTH - 150 - 99, (Game.V_HEIGHT / 2 - 30) - 75 / 2, cam));
 		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();

@@ -21,8 +21,8 @@ public abstract class SpaceObject {
 		
 	}
 	
-	public SpaceObject(String s, int width, int height, int x, int y){
-		this.s = s;
+	public SpaceObject(Texture texture, int width, int height, int x, int y){
+		this.texture = texture;
 		this.width = width;
 		this.height = height;
 		this.x = x;
@@ -31,7 +31,6 @@ public abstract class SpaceObject {
 	}
 	
 	protected void initObject(){
-		texture = new Texture(Gdx.files.internal(s));
 		rectangle = new Rectangle();
 		rectangle.width = width;
 		rectangle.height = height;

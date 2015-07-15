@@ -17,8 +17,8 @@ public class Ship extends SpaceObject{
 	
 	private OrthographicCamera cam;
 	
-	public Ship(String s, int width, int height, int x, int y, OrthographicCamera cam){
-		super(s, width, height, x, y);
+	public Ship(Texture texture, int width, int height, int x, int y, OrthographicCamera cam){
+		super(texture, width, height, x, y);
 		initObject();
 		this.cam = cam;
 		state = false;

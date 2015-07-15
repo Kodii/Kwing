@@ -2,6 +2,7 @@ package com.kwing.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Resources {
@@ -10,6 +11,10 @@ public class Resources {
 		
 		private static Texture background = new Texture(Gdx.files.internal("Backgrounds/purple.png"));
 		
+		private static Texture playerShipBlue1 = new Texture(Gdx.files.internal("PNG/playerShip1_blue.png"));
+		private static Texture playerShipBlue2 = new Texture(Gdx.files.internal("PNG/playerShip2_blue.png"));
+		private static Texture playerShipBlue3 = new Texture(Gdx.files.internal("PNG/playerShip3_blue.png"));
+
 		private static Texture pillBlue = new Texture(Gdx.files.internal("PNG/Power-ups/pill_blue.png"));
 		private static Texture pillGreen = new Texture(Gdx.files.internal("PNG/Power-ups/pill_green.png"));
 		private static Texture pillRed = new Texture(Gdx.files.internal("PNG/Power-ups/pill_red.png"));
@@ -29,6 +34,24 @@ public class Resources {
 		}
 		public static void setBackground(Texture background) {
 			Textures.background = background;
+		}
+		public static Texture getPlayerShipBlue1() {
+			return playerShipBlue1;
+		}
+		public static void setPlayerShipBlue1(Texture playerShipBlue1) {
+			Textures.playerShipBlue1 = playerShipBlue1;
+		}
+		public static Texture getPlayerShipBlue2() {
+			return playerShipBlue2;
+		}
+		public static void setPlayerShipBlue2(Texture playerShipBlue2) {
+			Textures.playerShipBlue2 = playerShipBlue2;
+		}
+		public static Texture getPlayerShipBlue3() {
+			return playerShipBlue3;
+		}
+		public static void setPlayerShipBlue3(Texture playerShipBlue3) {
+			Textures.playerShipBlue3 = playerShipBlue3;
 		}
 		public static Texture getPillBlue() {
 			return pillBlue;
@@ -96,7 +119,8 @@ public class Resources {
 		
 		private static Music intro = Gdx.audio.newMusic(Gdx.files.internal("Sounds/intro.ogg"));
 		private static Music level = Gdx.audio.newMusic(Gdx.files.internal("Sounds/level1.ogg"));
-		
+		private static Sound shotSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_laser2.ogg"));
+				
 		public static Music getIntro() {
 			return intro;
 		}
@@ -109,10 +133,23 @@ public class Resources {
 		public static void setLevel(Music level) {
 			Sounds.level = level;
 		}
+		public static Sound getShotSound() {
+			return shotSound;
+		}
+		public static void setShotSound(Sound shotSound) {
+			Sounds.shotSound = shotSound;
+		}
 		
 	}
 	
 	
+	
+	public static class Fonts{
+		
+
+		
+		
+	}
 	
 
 }

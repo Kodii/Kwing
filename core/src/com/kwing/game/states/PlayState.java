@@ -102,6 +102,7 @@ public class PlayState extends GameState {
 				meteors.get(i).update(dt); // updating meteor 
 			//player>>meteor collision
 				if(player.getRectangle().overlaps(meteors.get(i).getRectangle())){ 
+					
 					player.setHealth(player.getHealth() - 1);
 				}
 				

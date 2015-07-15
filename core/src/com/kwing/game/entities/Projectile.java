@@ -1,7 +1,6 @@
 package com.kwing.game.entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -14,6 +13,7 @@ public class Projectile extends SpaceObject{
 	private Rectangle rectangle;
 	private Player player;
 	private Ship ship;
+	private Sound shotSound;
 	private boolean visible;
 	
 
@@ -42,8 +42,8 @@ public class Projectile extends SpaceObject{
 		rectangle.width = texture.getWidth();
 		rectangle.height = texture.getHeight();
 		
-		
-		
+		shotSound = Resources.Sounds.getShotSound();
+		shotSound.play(0.1f);
 		
 	}
 	
