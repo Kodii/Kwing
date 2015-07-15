@@ -12,6 +12,7 @@ import com.kwing.game.entities.Hud;
 import com.kwing.game.entities.Meteor;
 import com.kwing.game.entities.Player;
 import com.kwing.game.entities.Projectile;
+import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.Ship;
 import com.kwing.game.entities.play.Background;
 import com.kwing.game.entities.play.powers.RegenPill;
@@ -103,6 +104,7 @@ public class PlayState extends GameState {
 				if(player.getRectangle().overlaps(meteors.get(i).getRectangle())){ 
 					
 					player.setHealth(player.getHealth() - 1);
+					player.setLostHealth(true);
 				}
 				
 				if(meteors.get(i).getRectangle().y < -200){ // removing meteors which reaches lower border
@@ -156,11 +158,13 @@ public class PlayState extends GameState {
 								
 								if(meteors.get(j).getLives() == 0){
 								//creating regen pills after full meteor destroy
+									
 									if(random.nextInt(100) + 1 < RegenPill.PILL_CHANCE){
 										randomNumber = random.nextInt(4);
 										regenPill = new RegenPill(meteors.get(j).getRectangle(), randomNumber); // random number 0-3
 										regenPills.add(regenPill);
 									}
+									Resources.Sounds.getMeteorExplosion().play();
 									meteors.remove(j);
 								}
 							}

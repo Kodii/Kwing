@@ -1,9 +1,13 @@
 package com.kwing.game.entities.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,23 +16,32 @@ import com.kwing.game.main.Game;
 
 public class Menu {
 
+	private Texture startTexture;
+	private Rectangle startButton;
+	private Vector3 touchPos;
+	private OrthographicCamera cam;
+	private BitmapFont font128;
+
 	private boolean leftPressed;
 	private boolean state;
-
-	private Texture startTexture;
-
-	private Rectangle startButton;
-
-	private Vector3 touchPos;
-
-	private OrthographicCamera cam;
-
+	
 	public Menu(OrthographicCamera cam) {
 
 		this.cam = cam;
 		state = false;
 		
 		touchPos = new Vector3();
+		
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 128;
+		parameter.borderWidth = 2;
+		parameter.borderColor = Color.GRAY;
+		parameter.shadowColor = Color.BLACK;
+		parameter.shadowOffsetX = -5;
+		parameter.shadowOffsetY = -10;
+		font128 = generator.generateFont(parameter); // font size 12 pixels
+		generator.dispose(); // don't forget to dispose to avoid memory leaks!
 
 		startTexture = new Texture(Gdx.files.internal("button.png"));
 		startButton = new Rectangle();
@@ -75,6 +88,7 @@ public class Menu {
 		sb.begin();
 		sb.draw(startTexture, startButton.x, startButton.y, startButton.width,
 				startButton.height);
+		font128.draw(sb, "KWING", Game.V_WIDTH / 2 - 240, Game.V_HEIGHT - 200);
 		sb.end();
 
 	}

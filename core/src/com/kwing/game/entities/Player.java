@@ -15,7 +15,7 @@ public class Player extends SpaceObject {
 	public static final int HEALTH = 100;
 	public static final int LIVES = 3;
 	public static final int SCORE = 0;
-	public static final int POWER = 22;
+	public static final int POWER = 20;
 	
 	private OrthographicCamera cam;
 	private Vector3 touchPos;
@@ -29,6 +29,7 @@ public class Player extends SpaceObject {
 	private int score;
 	private boolean leftPressed;
 	private boolean pickedUp;
+	private boolean lostHealth;
 
 	public Player(OrthographicCamera cam, Ship ship) {
 		this.cam = cam;
@@ -42,7 +43,9 @@ public class Player extends SpaceObject {
 		ship.movementSpeed = MOVEMENTSPEED;
 		this.rectangle = ship.getRectangle();
 		touchPos = new Vector3();
+		
 		pickedUp = false;
+		lostHealth = false;
 		
 	}
 
@@ -51,6 +54,11 @@ public class Player extends SpaceObject {
 		if(pickedUp){
 			Resources.Sounds.getPickUp().play();
 			pickedUp = false;
+		}
+		
+		if(lostHealth){
+			Resources.Sounds.getLostHealth().play();
+			lostHealth = false;
 		}
 		if (Gdx.input.isTouched()) {
 			
@@ -132,6 +140,14 @@ public class Player extends SpaceObject {
 
 	public void setPickedUp(boolean pickedUp) {
 		this.pickedUp = pickedUp;
+	}
+
+	public boolean isLostHealth() {
+		return lostHealth;
+	}
+
+	public void setLostHealth(boolean lostHealth) {
+		this.lostHealth = lostHealth;
 	}
 
 }

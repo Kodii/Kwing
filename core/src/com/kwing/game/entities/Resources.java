@@ -121,7 +121,9 @@ public class Resources {
 		private static Music level = Gdx.audio.newMusic(Gdx.files.internal("Sounds/level1.ogg"));
 		private static Sound shotSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_laser2.ogg"));
 		private static Sound pickUp = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_pickedUp.ogg"));
-	
+		private static Sound lostHealth = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_lose.ogg"));
+		private static Sound meteorExplosion = Gdx.audio.newSound(Gdx.files.internal("Sounds/explosion.wav"));
+		
 				
 		public static Music getIntro() {
 			return intro;
@@ -146,6 +148,18 @@ public class Resources {
 		}
 		public static void setPickUp(Sound pickUp) {
 			Sounds.pickUp = pickUp;
+		}
+		public static Sound getLostHealth() {
+			return lostHealth;
+		}
+		public static void setLostHealth(Sound lostHealth) {
+			Sounds.lostHealth = lostHealth;
+		}
+		public static Sound getMeteorExplosion() {
+			return meteorExplosion;
+		}
+		public static void setMeteorExplosion(Sound meteorExplosion) {
+			Sounds.meteorExplosion = meteorExplosion;
 		}
 		
 	}

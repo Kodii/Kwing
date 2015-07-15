@@ -49,8 +49,8 @@ public class Meteor extends SpaceObject{
 	public void update(float dt){
 		
 	//
-		
-		
+		if(destroyed)
+			Resources.Sounds.getMeteorExplosion().play();
 	// meteor movement on screen	
 		rectangle.y -= movementSpeed * dt;
 	// lives = 2
@@ -109,6 +109,7 @@ public class Meteor extends SpaceObject{
 				rectangle.x -= movementSpeed * dt;
 			}
 		}
+		
 	}
 	
 	public void render(SpriteBatch sb){

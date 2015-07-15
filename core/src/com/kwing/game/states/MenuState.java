@@ -3,17 +3,24 @@ package com.kwing.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.menu.Menu;
 import com.kwing.game.entities.menu.MenuBackground;
 import com.kwing.game.handlers.GameStateManager;
+import com.kwing.game.main.Game;
 
 public class MenuState extends GameState {
 	
 	private MenuBackground menuBG;
 	private Menu menu;
 	private Music intro;
+	
 	private boolean leftPressed;
+	
 	
 	public MenuState(GameStateManager gsm){
 		super(gsm);
@@ -23,6 +30,8 @@ public class MenuState extends GameState {
 	public void init() {
 		menuBG = new MenuBackground();
 		menu = new Menu(cam);
+		
+		
 		
 		intro = Resources.Sounds.getIntro();
 		intro.play();
@@ -52,6 +61,7 @@ public class MenuState extends GameState {
 		
 		menuBG.render(sb);
 		menu.render(sb);
+		
 		
 	}
 
