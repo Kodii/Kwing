@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Kwing";
 		config.width = 800;
-		config.height = 1280;
+		config.height = 980;
 		config.resizable = false;
 		config.y = 10;
 		new LwjglApplication(new Game(), config);

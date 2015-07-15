@@ -45,7 +45,6 @@ public class ChoseState extends GameState {
 		startGameMusic = Resources.Sounds.getLevel();
 		startGameMusic.play();
 		startGameMusic.setLooping(true);
-		startGameMusic.setVolume(0.3f);
 
 	}
 

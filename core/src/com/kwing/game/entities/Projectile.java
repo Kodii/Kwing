@@ -43,7 +43,7 @@ public class Projectile extends SpaceObject{
 		rectangle.height = texture.getHeight();
 		
 		shotSound = Resources.Sounds.getShotSound();
-		shotSound.play(0.1f);
+		shotSound.play(0.3f);
 		
 	}
 	
