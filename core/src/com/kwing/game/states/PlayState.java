@@ -28,18 +28,17 @@ public class PlayState extends GameState {
 	private Hud hud;
 	private RegenPill regenPill;
 	private Random random;
+	private BitmapFont font48;
+
+	private ArrayList<Projectile> projectiles;
+	private ArrayList<Meteor> meteors;
+	private ArrayList<RegenPill> regenPills;
 	
 	private boolean start = false;
 	
 	private int delayTime;
 	private int spawnTime;
 	private int randomNumber;
-	
-	private BitmapFont font48;
-
-	private ArrayList<Projectile> projectiles;
-	private ArrayList<Meteor> meteors;
-	private ArrayList<RegenPill> regenPills;
 	// TODO SKONCZYLEM NA USTAWIANIU FACTORA W KLASIE METEOR, TERAZ TRZEBA DOROBIC
 	// POZIOMY MOCY.
 	public PlayState(GameStateManager gsm, Ship ship){
@@ -175,6 +174,7 @@ public class PlayState extends GameState {
 					
 					if(player.getRectangle().overlaps(regenPills.get(i).getRectangle())){ 
 							
+						player.setPickedUp(true);
 						if(player.getHealth() < 100){ // if health is less than full, then increase it.
 							player.setHealth(player.getHealth() + regenPills.get(i).getHealth());
 							if(player.getHealth() > 100) // checking if it isnt reached maximum hp

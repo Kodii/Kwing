@@ -120,6 +120,8 @@ public class Resources {
 		private static Music intro = Gdx.audio.newMusic(Gdx.files.internal("Sounds/intro.ogg"));
 		private static Music level = Gdx.audio.newMusic(Gdx.files.internal("Sounds/level1.ogg"));
 		private static Sound shotSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_laser2.ogg"));
+		private static Sound pickUp = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_pickedUp.ogg"));
+	
 				
 		public static Music getIntro() {
 			return intro;
@@ -138,6 +140,12 @@ public class Resources {
 		}
 		public static void setShotSound(Sound shotSound) {
 			Sounds.shotSound = shotSound;
+		}
+		public static Sound getPickUp() {
+			return pickUp;
+		}
+		public static void setPickUp(Sound pickUp) {
+			Sounds.pickUp = pickUp;
 		}
 		
 	}

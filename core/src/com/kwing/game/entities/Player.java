@@ -1,8 +1,7 @@
 package com.kwing.game.entities;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -29,6 +28,7 @@ public class Player extends SpaceObject {
 	private float centerX, centerY;
 	private int score;
 	private boolean leftPressed;
+	private boolean pickedUp;
 
 	public Player(OrthographicCamera cam, Ship ship) {
 		this.cam = cam;
@@ -42,10 +42,16 @@ public class Player extends SpaceObject {
 		ship.movementSpeed = MOVEMENTSPEED;
 		this.rectangle = ship.getRectangle();
 		touchPos = new Vector3();
+		pickedUp = false;
 		
 	}
 
 	public void update(float dt) {
+		
+		if(pickedUp){
+			Resources.Sounds.getPickUp().play();
+			pickedUp = false;
+		}
 		if (Gdx.input.isTouched()) {
 			
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0); 
@@ -118,6 +124,14 @@ public class Player extends SpaceObject {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public boolean isPickedUp() {
+		return pickedUp;
+	}
+
+	public void setPickedUp(boolean pickedUp) {
+		this.pickedUp = pickedUp;
 	}
 
 }
