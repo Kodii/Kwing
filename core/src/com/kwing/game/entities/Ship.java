@@ -24,26 +24,6 @@ public class Ship extends SpaceObject{
 		state = false;
 		touchPos = new Vector3();
 		
-//		shipTexture1 = new Texture(Gdx.files.internal("PNG/playerShip1_blue.png"));
-//		shipRectangle1 = new Rectangle();
-//		shipRectangle1.width = 99;
-//		shipRectangle1.height = 75;
-//		shipRectangle1.x = 150;
-//		shipRectangle1.y = (Game.V_HEIGHT / 2 - 30) - shipRectangle1.height / 2;
-		
-//		shipTexture2 = new Texture(Gdx.files.internal("PNG/playerShip2_blue.png"));
-//		shipRectangle2 = new Rectangle();
-//		shipRectangle2.width = 99;
-//		shipRectangle2.height = 75;
-//		shipRectangle2.x = Game.V_WIDTH / 2 - shipRectangle2.width / 2;
-//		shipRectangle2.y = (Game.V_HEIGHT / 2 - 30) - shipRectangle2.height / 2;
-//		
-//		shipTexture3 = new Texture(Gdx.files.internal("PNG/playerShip3_blue.png"));
-//		shipRectangle3 = new Rectangle();
-//		shipRectangle3.width = 99;
-//		shipRectangle3.height = 75;
-//		shipRectangle3.x = Game.V_WIDTH  - shipRectangle1.x - shipRectangle3.width;
-//		shipRectangle3.y = (Game.V_HEIGHT / 2 - 30) - shipRectangle3.height / 2;
 	}
 	
 	public void update(float dt){

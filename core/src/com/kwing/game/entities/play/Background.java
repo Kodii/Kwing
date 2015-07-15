@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.kwing.game.entities.Resources;
 import com.kwing.game.main.Game;
 
 public class Background {
@@ -14,7 +15,7 @@ public class Background {
 	private int speed = 100;
 
 	public Background() {
-		textureRegion = new TextureRegion(new Texture("Backgrounds/purple.png"));
+		textureRegion = new TextureRegion(Resources.Textures.getBackground());
 		textureRegionBounds1 = new Rectangle(0, 0 - Game.V_HEIGHT / 2, Game.V_WIDTH, Game.V_HEIGHT);
 		textureRegionBounds2 = new Rectangle(0, Game.V_WIDTH / 2, Game.V_WIDTH, Game.V_HEIGHT);
 	}

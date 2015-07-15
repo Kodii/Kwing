@@ -16,16 +16,11 @@ public abstract class GameState {
 	protected SpriteBatch sb;
 	protected OrthographicCamera cam;
 	
-	protected ArrayList<Texture> regenPillsTextures;
-	protected ArrayList<Texture> projectilesTextures;
-	
 	protected GameState(GameStateManager gsm){
 		this.gsm = gsm;
 		game = gsm.getGame();
 		sb = game.getSpriteBatch();
 		cam = game.getCamera();
-		regenPillsTextures = new ArrayList<Texture>();
-		projectilesTextures = new ArrayList<Texture>();
 		init();
 	}
 	

@@ -3,6 +3,7 @@ package com.kwing.game.entities.play.powers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.SpaceObject;
 
 public class RegenPill extends SpaceObject {
@@ -19,8 +20,7 @@ public class RegenPill extends SpaceObject {
 	
 	double angle;
 
-	public RegenPill(Texture texture, Rectangle rectangle, int type){
-		this.texture = texture;
+	public RegenPill(Rectangle rectangle, int type){
 		this.rectangle = rectangle;
 		
 		width = WIDTH;
@@ -33,18 +33,22 @@ public class RegenPill extends SpaceObject {
 		
 		switch(type){
 		case 0:
+			texture = Resources.Textures.getPillRed();
 			health = HEALTH * 2;
 			score = SCORE * 2;
 			break;
 		case 1:
+			texture = Resources.Textures.getPillBlue();
 			health = HEALTH * 4;
 			score = SCORE * 4;
 			break;
 		case 2:
+			texture = Resources.Textures.getPillYellow();
 			health = HEALTH * 6;
 			score = SCORE * 6;
 			break;
 		case 3:
+			texture = Resources.Textures.getPillRed();
 			health = HEALTH * 8;
 			score = SCORE * 8;
 			break;

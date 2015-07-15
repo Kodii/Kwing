@@ -16,7 +16,7 @@ public class Player extends SpaceObject {
 	public static final int HEALTH = 100;
 	public static final int LIVES = 3;
 	public static final int SCORE = 0;
-	public static final int POWER = 20;
+	public static final int POWER = 22;
 	
 	private OrthographicCamera cam;
 	private Vector3 touchPos;

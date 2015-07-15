@@ -56,7 +56,6 @@ public class PlayState extends GameState {
 		meteors = new ArrayList<Meteor>();
 		hud = new Hud(player);
 		regenPills = new ArrayList<RegenPill>();
-		loadTextures();
 		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -66,19 +65,6 @@ public class PlayState extends GameState {
 	
 	}
 	
-	private void loadTextures(){
-		projectilesTextures.add(0, new Texture(Gdx.files.internal("Lasers/laserBlue1.png")));
-		projectilesTextures.add(1, new Texture(Gdx.files.internal("Lasers/laserBlue2.png")));
-		projectilesTextures.add(2, new Texture(Gdx.files.internal("Lasers/laserBlue3.png")));
-		projectilesTextures.add(3, new Texture(Gdx.files.internal("Lasers/laserBlue4.png")));
-		projectilesTextures.add(4, new Texture(Gdx.files.internal("Lasers/laserBlue5.png")));
-		projectilesTextures.add(5, new Texture(Gdx.files.internal("Lasers/laserBlue6.png")));
-		
-		regenPillsTextures.add(0, new Texture(Gdx.files.internal("PNG/Power-ups/pill_blue.png")));
-		regenPillsTextures.add(1, new Texture(Gdx.files.internal("PNG/Power-ups/pill_green.png")));
-		regenPillsTextures.add(2, new Texture(Gdx.files.internal("PNG/Power-ups/pill_red.png")));
-		regenPillsTextures.add(3, new Texture(Gdx.files.internal("PNG/Power-ups/pill_yellow.png")));
-	}
 	
 	@Override
 	public void init() {
@@ -128,11 +114,7 @@ public class PlayState extends GameState {
 			// shooting , creating projectiles
 				if (delayTime > 8){
 					delayTime = 0;
-					
-					if(player.getPower() == 20)
-						projectile = new Projectile(projectilesTextures.get(0), player);
-					if(player.getPower() > 20 && player.getPower() < 60)
-						projectile = new Projectile(projectilesTextures.get(1), player);
+					projectile = new Projectile(player);
 					projectiles.add(projectile);
 				}
 			}
@@ -176,7 +158,7 @@ public class PlayState extends GameState {
 								//creating regen pills after full meteor destroy
 									if(random.nextInt(100) + 1 < RegenPill.PILL_CHANCE){
 										randomNumber = random.nextInt(4);
-										regenPill = new RegenPill(regenPillsTextures.get(randomNumber), meteors.get(j).getRectangle(), randomNumber); // random number 0-3
+										regenPill = new RegenPill(meteors.get(j).getRectangle(), randomNumber); // random number 0-3
 										regenPills.add(regenPill);
 									}
 									meteors.remove(j);

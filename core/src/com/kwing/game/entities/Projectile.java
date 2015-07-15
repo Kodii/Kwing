@@ -22,21 +22,27 @@ public class Projectile extends SpaceObject{
 		power = player.power;
 	}
 	
-	public Projectile(Texture texture, Player player){
+	public Projectile(Player player){
 		this.player = player;
-		this.texture = texture;
 		visible = true;
 		movementSpeed = SPEED;
 		power = player.power;
 		ship = player.getShip();
 		
-//		texture = new Texture(Gdx.files.internal("Lasers/laserBlue06.png"));
+		if(player.getPower() <= 20)
+			texture = Resources.Textures.getLaserBlue1();
+		else if(player.getPower() > 20 && player.getPower() <= 60)
+			texture = Resources.Textures.getLaserBlue2();
+			
+		
 		rectangle = new Rectangle();
 		
 		rectangle.x = ship.rectangle.x + ship.rectangle.width / 2 - 6;
 		rectangle.y = ship.rectangle.y + ship.rectangle.height;
 		rectangle.width = texture.getWidth();
 		rectangle.height = texture.getHeight();
+		
+		
 		
 		
 	}
