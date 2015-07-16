@@ -1,4 +1,4 @@
-package com.kwing.game.entities.player;
+package com.kwing.game.entities.spaceObject.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.kwing.game.entities.Resources;
-import com.kwing.game.entities.Ship;
-import com.kwing.game.entities.SpaceObject;
+import com.kwing.game.entities.spaceObject.SpaceObject;
 import com.kwing.game.main.Game;
 
 public class Player extends SpaceObject {

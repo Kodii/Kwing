@@ -1,4 +1,4 @@
-package com.kwing.game.entities.menu;
+package com.kwing.game.entities.backgrounds;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

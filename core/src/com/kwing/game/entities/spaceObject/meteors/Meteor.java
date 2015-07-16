@@ -1,15 +1,16 @@
-package com.kwing.game.entities;
+package com.kwing.game.entities.spaceObject.meteors;
 
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.kwing.game.entities.player.Player;
-import com.kwing.game.interfaces.MeteorObject;
+import com.kwing.game.entities.Resources;
+import com.kwing.game.entities.spaceObject.SpaceObject;
+import com.kwing.game.entities.spaceObject.player.Player;
 import com.kwing.game.main.Game;
 
-public class Meteor extends SpaceObject{
+public class Meteor extends MeteorObject{
 
 	public static final int MOVEMENTSPEED = 100;
 	public static final int WIDTH = 150;

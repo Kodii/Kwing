@@ -1,9 +1,12 @@
-package com.kwing.game.entities;
+package com.kwing.game.entities.spaceObject.projectile;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.kwing.game.entities.player.Player;
+import com.kwing.game.entities.Resources;
+import com.kwing.game.entities.spaceObject.SpaceObject;
+import com.kwing.game.entities.spaceObject.player.Player;
+import com.kwing.game.entities.spaceObject.player.Ship;
 
 public class Projectile extends SpaceObject{
 	
@@ -20,14 +23,14 @@ public class Projectile extends SpaceObject{
 
 	public Projectile(){
 		visible = false;
-		power = player.power;
+		power = player.getPower();
 	}
 	
 	public Projectile(Player player){
 		this.player = player;
 		visible = true;
 		movementSpeed = SPEED;
-		power = player.power;
+		power = player.getPower();
 		ship = player.getShip();
 		
 		if(player.getPower() <= 20)
@@ -38,8 +41,8 @@ public class Projectile extends SpaceObject{
 		
 		rectangle = new Rectangle();
 		
-		rectangle.x = ship.rectangle.x + ship.rectangle.width / 2 - 6;
-		rectangle.y = ship.rectangle.y + ship.rectangle.height;
+		rectangle.x = ship.getRectangle().x + ship.getRectangle().width / 2 - 6;
+		rectangle.y = ship.getRectangle().y + ship.getRectangle().height;
 		rectangle.width = getTexture().getWidth();
 		rectangle.height = getTexture().getHeight();
 		

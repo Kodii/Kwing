@@ -1,10 +1,10 @@
-package com.kwing.game.entities.play.powers;
+package com.kwing.game.entities.spaceObject.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
-import com.kwing.game.entities.SpaceObject;
+import com.kwing.game.entities.spaceObject.SpaceObject;
 
 public class RegenPill extends SpaceObject {
 	

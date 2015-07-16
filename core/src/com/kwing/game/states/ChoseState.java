@@ -9,9 +9,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.kwing.game.entities.Resources;
-import com.kwing.game.entities.Resources.Textures;
-import com.kwing.game.entities.Ship;
-import com.kwing.game.entities.menu.MenuBackground;
+import com.kwing.game.entities.backgrounds.MenuBackground;
+import com.kwing.game.entities.spaceObject.player.Ship;
 import com.kwing.game.handlers.GameStateManager;
 import com.kwing.game.main.Game;
 

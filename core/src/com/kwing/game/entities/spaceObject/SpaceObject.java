@@ -1,4 +1,4 @@
-package com.kwing.game.entities;
+package com.kwing.game.entities.spaceObject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

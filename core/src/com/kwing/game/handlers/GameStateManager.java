@@ -2,7 +2,7 @@ package com.kwing.game.handlers;
 
 import java.util.ArrayList;
 
-import com.kwing.game.entities.Ship;
+import com.kwing.game.entities.spaceObject.player.Ship;
 import com.kwing.game.main.Game;
 import com.kwing.game.states.ChoseState;
 import com.kwing.game.states.GameState;

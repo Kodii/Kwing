@@ -1,6 +1,4 @@
-package com.kwing.game.entities;
-
-import java.util.ArrayList;
+package com.kwing.game.entities.huds;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -8,7 +6,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.kwing.game.entities.player.Player;
+import com.kwing.game.entities.spaceObject.player.Player;
+import com.kwing.game.entities.spaceObject.player.Ship;
+import com.kwing.game.entities.spaceObject.projectile.Projectile;
 import com.kwing.game.main.Game;
 
 public class Hud {
@@ -110,7 +110,7 @@ public class Hud {
 		font18.setColor(Color.RED);
 		font18.draw(sb, "POWER: ", powerX, powerY);
 		font18.setColor(Color.WHITE);
-		font18.draw(sb, Integer.toString(player.power), powerX + 90, powerY);
+		font18.draw(sb, Integer.toString(player.getPower()), powerX + 90, powerY);
 	}
 }
 

@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.kwing.game.entities.Hud;
-import com.kwing.game.entities.Meteor;
-import com.kwing.game.entities.Projectile;
 import com.kwing.game.entities.Resources;
-import com.kwing.game.entities.Ship;
-import com.kwing.game.entities.play.Background;
-import com.kwing.game.entities.play.powers.RegenPill;
-import com.kwing.game.entities.player.Player;
+import com.kwing.game.entities.backgrounds.PlayBackground;
+import com.kwing.game.entities.huds.Hud;
+import com.kwing.game.entities.spaceObject.meteors.Meteor;
+import com.kwing.game.entities.spaceObject.player.Player;
+import com.kwing.game.entities.spaceObject.player.Ship;
+import com.kwing.game.entities.spaceObject.powers.RegenPill;
+import com.kwing.game.entities.spaceObject.projectile.Projectile;
 import com.kwing.game.handlers.GameStateManager;
 import com.kwing.game.main.Game;
 
 public class PlayState extends GameState {
 	
 	private Player player;
-	private Background background;
+	private PlayBackground background;
 	private Projectile projectile;
 	private Ship ship;
 	private Meteor meteor;
@@ -50,7 +49,7 @@ public class PlayState extends GameState {
 		this.ship = ship;
 		
 		random = new Random();
-		background = new Background();
+		background = new PlayBackground();
 		player = new Player(orthographicCamera, ship);
 		projectiles = new ArrayList<Projectile>();
 		meteors = new ArrayList<Meteor>();
