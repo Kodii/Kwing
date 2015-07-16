@@ -3,6 +3,7 @@ package com.kwing.game.entities;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.kwing.game.entities.player.Player;
 
 public class Projectile extends SpaceObject{
 	
@@ -30,17 +31,17 @@ public class Projectile extends SpaceObject{
 		ship = player.getShip();
 		
 		if(player.getPower() <= 20)
-			texture = Resources.Textures.getLaserBlue1();
+			setTexture(Resources.Textures.getLaserBlue1());
 		else if(player.getPower() > 20 && player.getPower() <= 60)
-			texture = Resources.Textures.getLaserBlue2();
+			setTexture(Resources.Textures.getLaserBlue2());
 			
 		
 		rectangle = new Rectangle();
 		
 		rectangle.x = ship.rectangle.x + ship.rectangle.width / 2 - 6;
 		rectangle.y = ship.rectangle.y + ship.rectangle.height;
-		rectangle.width = texture.getWidth();
-		rectangle.height = texture.getHeight();
+		rectangle.width = getTexture().getWidth();
+		rectangle.height = getTexture().getHeight();
 		
 		shotSound = Resources.Sounds.getShotSound();
 		shotSound.play(0.3f);
@@ -53,7 +54,7 @@ public class Projectile extends SpaceObject{
 	
 	public void render(SpriteBatch sb){
 		sb.begin();
-		sb.draw(texture, rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+		sb.draw(getTexture(), rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 		sb.end();
 	}
 

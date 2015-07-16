@@ -1,12 +1,14 @@
-package com.kwing.game.entities;
+package com.kwing.game.entities.player;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.kwing.game.entities.Resources;
+import com.kwing.game.entities.Ship;
+import com.kwing.game.entities.SpaceObject;
 import com.kwing.game.main.Game;
 
 public class Player extends SpaceObject {
@@ -38,9 +40,9 @@ public class Player extends SpaceObject {
 		lives = LIVES;
 		health = HEALTH;
 		power = POWER;
-		ship.rectangle.x = Game.V_WIDTH / 2 - ship.width / 2;
-		ship.rectangle.y = 200;
-		ship.movementSpeed = MOVEMENTSPEED;
+		ship.getRectangle().x = Game.V_WIDTH / 2 - ship.getWidth() / 2;
+		ship.getRectangle().y = 200;
+		ship.setMovementSpeed(MOVEMENTSPEED);
 		this.rectangle = ship.getRectangle();
 		touchPos = new Vector3();
 		
@@ -65,35 +67,35 @@ public class Player extends SpaceObject {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0); 
 			cam.unproject(touchPos);
 
-			if(touchPos.x < ship.rectangle.x + ship.width / 2){
-				ship.rectangle.x -= ship.movementSpeed * dt;
+			if(touchPos.x < ship.getRectangle().x + ship.getWidth() / 2){
+				ship.getRectangle().x -= ship.getMovementSpeed() * dt;
 			}
-			if(touchPos.x > ship.rectangle.x + ship.width / 2){
-				ship.rectangle.x += ship.movementSpeed * dt;
+			if(touchPos.x > ship.getRectangle().x + ship.getWidth() / 2){
+				ship.getRectangle().x += ship.getMovementSpeed() * dt;
 			}
-			if(touchPos.y < ship.rectangle.y + ship.height / 2)
-				ship.rectangle.y -= ship.movementSpeed * dt;
-			if(touchPos.y > ship.rectangle.y + ship.height / 2)
-				ship.rectangle.y += ship.movementSpeed * dt;
+			if(touchPos.y < ship.getRectangle().y + ship.getHeight() / 2)
+				ship.getRectangle().y -= ship.getMovementSpeed() * dt;
+			if(touchPos.y > ship.getRectangle().y + ship.getHeight() / 2)
+				ship.getRectangle().y += ship.getMovementSpeed() * dt;
 			
 		}
 		
 		// setting screen bounds
-		if(ship.rectangle.x < 0) 
-			ship.rectangle.x = 0;
-	    if(ship.rectangle.x > Game.V_WIDTH - ship.rectangle.width) 
-	    	ship.rectangle.x = Game.V_WIDTH - ship.rectangle.width;
-	    if(ship.rectangle.y < 0) 
-	    	ship.rectangle.y = 0;
-	    if(ship.rectangle.y > Game.V_HEIGHT - ship.rectangle.height) 
-	    	ship.rectangle.y = Game.V_HEIGHT - ship.rectangle.height;
+		if(ship.getRectangle().x < 0) 
+			ship.getRectangle().x = 0;
+	    if(ship.getRectangle().x > Game.V_WIDTH - ship.getRectangle().width) 
+	    	ship.getRectangle().x = Game.V_WIDTH - ship.getRectangle().width;
+	    if(ship.getRectangle().y < 0) 
+	    	ship.getRectangle().y = 0;
+	    if(ship.getRectangle().y > Game.V_HEIGHT - ship.getRectangle().height) 
+	    	ship.getRectangle().y = Game.V_HEIGHT - ship.getRectangle().height;
 	}
 	
 
 	public void render(SpriteBatch sb) {
 
 		sb.begin();
-		sb.draw(ship.texture, ship.rectangle.x, ship.rectangle.y, ship.rectangle.width, ship.rectangle.height);
+		sb.draw(ship.getTexture(), ship.getRectangle().x, ship.getRectangle().y, ship.getRectangle().width, ship.getRectangle().height);
 		sb.end();
 
 	}

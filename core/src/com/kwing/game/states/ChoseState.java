@@ -21,7 +21,10 @@ public class ChoseState extends GameState {
 	private Ship playerShipBlue1, playerShipBlue2, playerShipBlue3;
 	private ArrayList<Ship> ships;
 	
+	private FreeTypeFontGenerator generator;
+	private FreeTypeFontParameter parameter;
 	private BitmapFont font48;
+	
 	private Music startGameMusic;
 	
 	private int verticalSpace;
@@ -36,6 +39,8 @@ public class ChoseState extends GameState {
 	public void init() {
 		menuBG = new MenuBackground();
 		ships = new ArrayList<Ship>();
+		generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
+		parameter = new FreeTypeFontParameter();
 		
 		verticalSpace = (Game.V_HEIGHT / 2 - 30) - Ship.SHIP_HEIGHT;
 		horizontalSpace = 150;
@@ -49,8 +54,7 @@ public class ChoseState extends GameState {
 		startGameMusic.play();
 		startGameMusic.setLooping(true);
 		
-		generateFont();
-
+		font48 = generateFont(48);
 	}
 	
 	private Ship createShip(Texture shipTexture, float x, float y){
@@ -63,12 +67,11 @@ public class ChoseState extends GameState {
 		ships.add(ship);
 	}
 	
-	private void generateFont(){
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 48;
-		font48 = generator.generateFont(parameter); // font size 12 pixels
-		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+	private BitmapFont generateFont(int fontSize){
+		BitmapFont font;
+		parameter.size = fontSize;
+		font = generator.generateFont(parameter);
+		return font;
 	}
 	
 	@Override
@@ -78,8 +81,7 @@ public class ChoseState extends GameState {
 			ships.get(i).update(dt);
 		}
 		for(int i = 0; i < ships.size(); i++){
-			if(ships.get(i).getState()){
-				ships.get(i).setState(false);
+			if(ships.get(i).isBound()){
 				gameStateManager.addState(GameStateManager.PLAYSTATE, ships.get(i));
 				gameStateManager.setState(GameStateManager.PLAYSTATE);
 			}
@@ -89,9 +91,11 @@ public class ChoseState extends GameState {
 	@Override
 	public void render() {
 		menuBG.render(spriteBatch);
+		
 		for(int i = 0; i < ships.size(); i++){
 			ships.get(i).render(spriteBatch);
 		}
+		
 		spriteBatch.begin();
 		font48.draw(spriteBatch, "SELECT SHIP", 200, Game.V_HEIGHT / 2 + Game.V_WIDTH / 4);
 		spriteBatch.end();
@@ -104,7 +108,7 @@ public class ChoseState extends GameState {
 	}
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		generator.dispose();
+		spriteBatch.dispose();
 	}
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.kwing.game.entities.player.Player;
 import com.kwing.game.main.Game;
 
 public class Hud {
@@ -86,14 +87,14 @@ public class Hud {
 		font18.setColor(Color.RED);
 		font18.draw(sb, "SHIPS: ", livesX, livesY);
 		if(player.getLives() == 3){
-			sb.draw(ship.texture, livesX + 80, livesY - livesHeight / 2, livesWidth, livesHeight);
-			sb.draw(ship.texture, livesX + 120, livesY - livesHeight / 2, livesWidth, livesHeight);
-			sb.draw(ship.texture, livesX + 160, livesY - livesHeight / 2, livesWidth, livesHeight);
+			sb.draw(ship.getTexture(), livesX + 80, livesY - livesHeight / 2, livesWidth, livesHeight);
+			sb.draw(ship.getTexture(), livesX + 120, livesY - livesHeight / 2, livesWidth, livesHeight);
+			sb.draw(ship.getTexture(), livesX + 160, livesY - livesHeight / 2, livesWidth, livesHeight);
 		}else if(player.getLives() == 2){
-			sb.draw(ship.texture, livesX + 80, livesY - livesHeight / 2, livesWidth, livesHeight);
-			sb.draw(ship.texture, livesX + 120, livesY - livesHeight / 2, livesWidth, livesHeight);
+			sb.draw(ship.getTexture(), livesX + 80, livesY - livesHeight / 2, livesWidth, livesHeight);
+			sb.draw(ship.getTexture(), livesX + 120, livesY - livesHeight / 2, livesWidth, livesHeight);
 		}else if(player.getLives() == 1)
-			sb.draw(ship.texture, livesX + 80, livesY - livesHeight / 2, livesWidth, livesHeight);
+			sb.draw(ship.getTexture(), livesX + 80, livesY - livesHeight / 2, livesWidth, livesHeight);
 		else{
 			font18.setColor(Color.WHITE);
 			font18.draw(sb, "NONE", livesX + 80, livesY);

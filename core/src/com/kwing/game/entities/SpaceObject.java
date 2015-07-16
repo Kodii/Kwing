@@ -4,12 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
-public abstract class SpaceObject {
+public abstract class SpaceObject{
 
-	protected String s;
-	protected int width, height;
+	protected String textureString;
+	private int width;
+	private int height;
 	protected float x, y;
-	protected Texture texture;
+	private Texture texture;
 	protected Rectangle rectangle;
 	protected int health;
 	protected int lives;
@@ -21,26 +22,9 @@ public abstract class SpaceObject {
 		
 	}
 	
-	public SpaceObject(Texture texture, int width, int height, int x, int y){
-		this.texture = texture;
-		this.width = width;
-		this.height = height;
-		this.x = x;
-		this.y = y;
-		
-	}
-	
-	protected void initObject(){
-		rectangle = new Rectangle();
-		rectangle.width = width;
-		rectangle.height = height;
-		rectangle.x = x;
-		rectangle.y = y;
-	}
-	
 	protected void initObject(String s, int width, int height, int x, int y){
 		this.x = x;
-		texture = new Texture(Gdx.files.internal(s));
+		setTexture(new Texture(Gdx.files.internal(s)));
 		rectangle = new Rectangle();
 		rectangle.width = width;
 		rectangle.height = height;
@@ -87,6 +71,30 @@ public abstract class SpaceObject {
 
 	public void setPower(int power) {
 		this.power = power;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public Texture getTexture() {
+		return texture;
+	}
+
+	public void setTexture(Texture texture) {
+		this.texture = texture;
 	}
 
 }

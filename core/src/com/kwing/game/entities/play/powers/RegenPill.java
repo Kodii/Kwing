@@ -23,32 +23,32 @@ public class RegenPill extends SpaceObject {
 	public RegenPill(Rectangle rectangle, int type){
 		this.rectangle = rectangle;
 		
-		width = WIDTH;
-		height = HEIGHT;
-		rectangle.width = width;
-		rectangle.height = height;
+		setWidth(WIDTH);
+		setHeight(HEIGHT);
+		rectangle.width = getWidth();
+		rectangle.height = getHeight();
 		x = rectangle.x;
 		y = rectangle.y;
 		movementSpeed = MOVEMENTSPEED;
 		
 		switch(type){
 		case 0:
-			texture = Resources.Textures.getPillRed();
+			setTexture(Resources.Textures.getPillRed());
 			health = HEALTH * 2;
 			score = SCORE * 2;
 			break;
 		case 1:
-			texture = Resources.Textures.getPillBlue();
+			setTexture(Resources.Textures.getPillBlue());
 			health = HEALTH * 4;
 			score = SCORE * 4;
 			break;
 		case 2:
-			texture = Resources.Textures.getPillYellow();
+			setTexture(Resources.Textures.getPillYellow());
 			health = HEALTH * 6;
 			score = SCORE * 6;
 			break;
 		case 3:
-			texture = Resources.Textures.getPillRed();
+			setTexture(Resources.Textures.getPillRed());
 			health = HEALTH * 8;
 			score = SCORE * 8;
 			break;
@@ -62,14 +62,14 @@ public class RegenPill extends SpaceObject {
 		if(angle > (2* Math.PI))
 			angle = 0.0;
 
-		  rectangle.x = x +(float) (Math.cos(angle) * (width / 3) + (width / 2));
-		  rectangle.y = y +(float) (Math.sin(angle) * (height / 3) + (height / 2));
+		  rectangle.x = x +(float) (Math.cos(angle) * (getWidth() / 3) + (getWidth() / 2));
+		  rectangle.y = y +(float) (Math.sin(angle) * (getHeight() / 3) + (getHeight() / 2));
 		  y -= movementSpeed * dt;
 	}
 	
 	public void render(SpriteBatch sb){
 		sb.begin();
-		sb.draw(texture, rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+		sb.draw(getTexture(), rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 		sb.end();
 	}
 

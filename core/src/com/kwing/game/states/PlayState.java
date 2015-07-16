@@ -10,12 +10,12 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.kwing.game.entities.Hud;
 import com.kwing.game.entities.Meteor;
-import com.kwing.game.entities.Player;
 import com.kwing.game.entities.Projectile;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.Ship;
 import com.kwing.game.entities.play.Background;
 import com.kwing.game.entities.play.powers.RegenPill;
+import com.kwing.game.entities.player.Player;
 import com.kwing.game.handlers.GameStateManager;
 import com.kwing.game.main.Game;
 
@@ -29,6 +29,9 @@ public class PlayState extends GameState {
 	private Hud hud;
 	private RegenPill regenPill;
 	private Random random;
+	
+	private FreeTypeFontGenerator generator;
+	private FreeTypeFontParameter parameter;
 	private BitmapFont font48;
 
 	private ArrayList<Projectile> projectiles;
@@ -46,9 +49,6 @@ public class PlayState extends GameState {
 		super(gsm);
 		this.ship = ship;
 		
-		delayTime = 0;
-		spawnTime = 0;
-		
 		random = new Random();
 		background = new Background();
 		player = new Player(orthographicCamera, ship);
@@ -56,9 +56,13 @@ public class PlayState extends GameState {
 		meteors = new ArrayList<Meteor>();
 		hud = new Hud(player);
 		regenPills = new ArrayList<RegenPill>();
+		generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
+		parameter = new FreeTypeFontParameter();
 		
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		
+		delayTime = 0;
+		spawnTime = 0;
+		
 		parameter.size = 48;
 		font48 = generator.generateFont(parameter); // font size 12 pixels
 		generator.dispose(); // don't forget to dispose to avoid memory leaks!
