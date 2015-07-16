@@ -7,30 +7,39 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.kwing.game.main.Game;
+import com.kwing.game.states.ChoseState;
 
 public class Ship extends SpaceObject{
 	
+	public static final int SHIP_WIDTH = 99;
+	public static final int SHIP_HEIGHT = 75;
 	//need this variable for send an object ship with choosen ship number to PlayState.
-	
 	private boolean state;
 	private Vector3 touchPos;
+	private OrthographicCamera orthographicCamera;
 	
-	private OrthographicCamera cam;
-	
-	public Ship(Texture texture, int width, int height, int x, int y, OrthographicCamera cam){
-		super(texture, width, height, x, y);
-		initObject();
-		this.cam = cam;
-		state = false;
+	public Ship(Texture texture, float x, float y){
+		this.texture = texture;
+		rectangle = new Rectangle();
 		touchPos = new Vector3();
 		
+		state = false;
+		
+		createShip(x, y);
+		
+	}
+	private void createShip(float x, float y){
+		rectangle.width = SHIP_WIDTH;
+		rectangle.height = SHIP_HEIGHT;
+		rectangle.x = x;
+		rectangle.y = y;
 	}
 	
 	public void update(float dt){
 		if (Gdx.input.isTouched()) {
 
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-			cam.unproject(touchPos);
+			orthographicCamera.unproject(touchPos);
 			
 			if (touchPos.x > rectangle.x
 					&& touchPos.x < (rectangle.x + rectangle.width)
@@ -53,6 +62,12 @@ public class Ship extends SpaceObject{
 	
 	public void setState(boolean b){
 		state = b;
+	}
+	public OrthographicCamera getOrthographicCamera() {
+		return orthographicCamera;
+	}
+	public void setOrthographicCamera(OrthographicCamera orthographicCamera) {
+		this.orthographicCamera = orthographicCamera;
 	}
 
 

@@ -51,7 +51,7 @@ public class PlayState extends GameState {
 		
 		random = new Random();
 		background = new Background();
-		player = new Player(cam, ship);
+		player = new Player(orthographicCamera, ship);
 		projectiles = new ArrayList<Projectile>();
 		meteors = new ArrayList<Meteor>();
 		hud = new Hud(player);
@@ -216,29 +216,29 @@ public class PlayState extends GameState {
 
 	@Override
 	public void render() {
-		background.render(sb);
+		background.render(spriteBatch);
 		
 		
 		if(!start){
-			player.render(sb);	
-			sb.begin();
-			font48.draw(sb, "TAP TO START", 200, Game.V_HEIGHT / 2 + Game.V_WIDTH / 4);
-			sb.end();
+			player.render(spriteBatch);	
+			spriteBatch.begin();
+			font48.draw(spriteBatch, "TAP TO START", 200, Game.V_HEIGHT / 2 + Game.V_WIDTH / 4);
+			spriteBatch.end();
 		}
 		else{
 			
 			
 			for(int i = 0; i < meteors.size(); i++){
-				meteors.get(i).render(sb);
+				meteors.get(i).render(spriteBatch);
 			}
 			for(int i = 0; i < regenPills.size(); i++){
-				regenPills.get(i).render(sb);
+				regenPills.get(i).render(spriteBatch);
 			}
-			player.render(sb);	
+			player.render(spriteBatch);	
 			for(int i = 0; i < projectiles.size(); i++){
-				projectiles.get(i).render(sb);
+				projectiles.get(i).render(spriteBatch);
 			}
-			hud.render(sb);
+			hud.render(spriteBatch);
 		}
 	}
 

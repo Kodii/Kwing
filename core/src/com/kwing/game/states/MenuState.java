@@ -29,7 +29,7 @@ public class MenuState extends GameState {
 	@Override
 	public void init() {
 		menuBG = new MenuBackground();
-		menu = new Menu(cam);
+		menu = new Menu(orthographicCamera);
 		
 		
 		
@@ -48,8 +48,8 @@ public class MenuState extends GameState {
 		menu.update(dt);
 		
 		if(menu.getState()){
-			gsm.addState(GameStateManager.CHOSESTATE);
-			gsm.setState(GameStateManager.CHOSESTATE);
+			gameStateManager.addState(GameStateManager.CHOSESTATE);
+			gameStateManager.setState(GameStateManager.CHOSESTATE);
 			menu.setState(false);
 			
 			intro.stop();
@@ -59,8 +59,8 @@ public class MenuState extends GameState {
 	@Override
 	public void render() {
 		
-		menuBG.render(sb);
-		menu.render(sb);
+		menuBG.render(spriteBatch);
+		menu.render(spriteBatch);
 		
 		
 	}

@@ -31,7 +31,7 @@ public class Game implements ApplicationListener {
 		cam.translate(V_WIDTH / 2, V_HEIGHT / 2);
 		cam.update();
 		
-		Gdx.input.setInputProcessor(new GameInputProcessor());
+//		Gdx.input.setInputProcessor(new GameInputProcessor());
 		
 		gsm = new GameStateManager(this);
 	}
@@ -45,14 +45,6 @@ public class Game implements ApplicationListener {
 		gsm.render();
 	}
 	
-	public SpriteBatch getSpriteBatch(){
-		return sb;
-	}
-	
-	public OrthographicCamera getCamera(){
-		return cam;
-	}
-
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
@@ -75,5 +67,13 @@ public class Game implements ApplicationListener {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public SpriteBatch getSpriteBatch(){
+		return sb;
+	}
+	
+	public OrthographicCamera getCamera(){
+		return cam;
 	}
 }

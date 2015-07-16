@@ -10,17 +10,17 @@ import com.kwing.game.main.Game;
 
 public abstract class GameState {
 
-	protected GameStateManager gsm;
+	protected GameStateManager gameStateManager;
 	protected Game game;
 	
-	protected SpriteBatch sb;
-	protected OrthographicCamera cam;
+	protected SpriteBatch spriteBatch;
+	protected OrthographicCamera orthographicCamera;
 	
 	protected GameState(GameStateManager gsm){
-		this.gsm = gsm;
+		this.gameStateManager = gsm;
 		game = gsm.getGame();
-		sb = game.getSpriteBatch();
-		cam = game.getCamera();
+		spriteBatch = game.getSpriteBatch();
+		orthographicCamera = game.getCamera();
 		init();
 	}
 	
