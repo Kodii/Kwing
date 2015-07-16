@@ -7,8 +7,9 @@ import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.spaceObject.SpaceObject;
 import com.kwing.game.entities.spaceObject.player.Player;
 import com.kwing.game.entities.spaceObject.player.Ship;
+import com.kwing.game.entities.spaceObject.powers.PowerObject;
 
-public class Projectile extends SpaceObject{
+public class Projectile extends PowerObject{
 	
 	public static final int HIT_SCORE = 5; // value of bullet hit score
 	public static final int SPEED = 500;

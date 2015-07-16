@@ -183,7 +183,7 @@ public class PlayState extends GameState {
 							
 						player.setPickedUp(true);
 						if(player.getHealth() < 100){ // if health is less than full, then increase it.
-							player.setHealth(player.getHealth() + regenPills.get(i).getHealth());
+							player.setHealth(player.getHealth() + regenPills.get(i).getPower());
 							if(player.getHealth() > 100) // checking if it isnt reached maximum hp
 								player.setHealth(100);
 						}

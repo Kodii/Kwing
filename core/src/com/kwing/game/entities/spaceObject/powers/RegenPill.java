@@ -1,17 +1,16 @@
 package com.kwing.game.entities.spaceObject.powers;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.spaceObject.SpaceObject;
 
-public class RegenPill extends SpaceObject {
+public class RegenPill extends PowerObject{
 	
 	public static final int PILL_CHANCE = 100; // percent chance of getting pill
 	private static final int WIDTH = 22;
 	private static final int HEIGHT = 21;
-	private static final int HEALTH = 5;
+	private static final int POWER = 5;
 	private static final int SCORE = 5;
 	private static final int MOVEMENTSPEED = 75;
 
@@ -34,22 +33,22 @@ public class RegenPill extends SpaceObject {
 		switch(type){
 		case 0:
 			setTexture(Resources.Textures.getPillRed());
-			health = HEALTH * 2;
+			power = POWER * 2;
 			score = SCORE * 2;
 			break;
 		case 1:
 			setTexture(Resources.Textures.getPillBlue());
-			health = HEALTH * 4;
+			power = POWER * 4;
 			score = SCORE * 4;
 			break;
 		case 2:
 			setTexture(Resources.Textures.getPillYellow());
-			health = HEALTH * 6;
+			power = POWER * 6;
 			score = SCORE * 6;
 			break;
 		case 3:
 			setTexture(Resources.Textures.getPillRed());
-			health = HEALTH * 8;
+			power = POWER * 8;
 			score = SCORE * 8;
 			break;
 		default:

@@ -1,13 +1,13 @@
-package com.kwing.game.entities.spaceObject.meteors;
+package com.kwing.game.entities.spaceObject.player;
 
 import com.kwing.game.entities.spaceObject.SpaceObject;
 
-public abstract class MeteorObject extends SpaceObject {
-
+public abstract class PlayerObject extends SpaceObject {
+	
 	protected int health;
 	protected int lives;
 	protected int power;
-
+	
 	public int getHealth() {
 		return health;
 	}

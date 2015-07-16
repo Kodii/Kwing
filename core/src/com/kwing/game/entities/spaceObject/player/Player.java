@@ -7,10 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.kwing.game.entities.Resources;
-import com.kwing.game.entities.spaceObject.SpaceObject;
 import com.kwing.game.main.Game;
 
-public class Player extends SpaceObject {
+public class Player extends PlayerObject {
 	
 	public static final int MOVEMENTSPEED = 250;
 	public static final int HEALTH = 100;
