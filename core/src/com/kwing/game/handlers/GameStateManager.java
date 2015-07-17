@@ -2,7 +2,7 @@ package com.kwing.game.handlers;
 
 import java.util.ArrayList;
 
-import com.kwing.game.entities.spaceObject.player.Ship;
+import com.kwing.game.entities.spaceObject.ships.Ship;
 import com.kwing.game.main.Game;
 import com.kwing.game.states.ChoseState;
 import com.kwing.game.states.GameState;
@@ -19,7 +19,6 @@ public class GameStateManager {
 	private ArrayList<GameState> gameStates;
 	private int currentState;
 	private Game game;
-	
 	private Ship ship;
 
 	public GameStateManager(Game game) {
@@ -47,7 +46,7 @@ public class GameStateManager {
 	public void addState(int state, Ship ship){
 		if(state == PLAYSTATE){
 			this.ship = ship;
-			gameStates.add(PLAYSTATE, new PlayState(this, ship));
+			gameStates.add(PLAYSTATE, new PlayState(this));
 		}
 	}
 	
@@ -66,6 +65,14 @@ public class GameStateManager {
 
 	public ArrayList<GameState> getGameStates() {
 		return gameStates;
+	}
+
+	public Ship getShip() {
+		return ship;
+	}
+
+	public void setShip(Ship ship) {
+		this.ship = ship;
 	}
 
 }

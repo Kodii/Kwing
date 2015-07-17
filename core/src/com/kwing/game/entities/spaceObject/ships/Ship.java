@@ -1,4 +1,4 @@
-package com.kwing.game.entities.spaceObject.player;
+package com.kwing.game.entities.spaceObject.ships;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;

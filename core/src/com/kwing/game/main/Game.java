@@ -31,8 +31,6 @@ public class Game implements ApplicationListener {
 		cam.translate(V_WIDTH / 2, V_HEIGHT / 2);
 		cam.update();
 		
-//		Gdx.input.setInputProcessor(new GameInputProcessor());
-		
 		gsm = new GameStateManager(this);
 	}
 

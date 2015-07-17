@@ -2,12 +2,16 @@ package com.kwing.game.entities.spaceObject.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.kwing.game.entities.Resources;
+import com.kwing.game.entities.spaceObject.meteors.Meteor;
+import com.kwing.game.entities.spaceObject.powers.RegenPill;
+import com.kwing.game.entities.spaceObject.projectile.Projectile;
+import com.kwing.game.entities.spaceObject.ships.Ship;
 import com.kwing.game.main.Game;
+import com.kwing.game.states.PlayState;
 
 public class Player extends PlayerObject {
 	
@@ -17,115 +21,150 @@ public class Player extends PlayerObject {
 	public static final int SCORE = 0;
 	public static final int POWER = 20;
 	
-	private OrthographicCamera cam;
-	private Vector3 touchPos;
-
 	private Ship ship;
+	private Projectile projectile;
+	private Vector3 touchPosition;
 	
-	private Texture texture;
-	private Rectangle rectangle;
-	
-	private float centerX, centerY;
 	private int score;
-	private boolean leftPressed;
+	private int shotDelay;
 	private boolean pickedUp;
-	private boolean lostHealth;
+	private boolean lostHealthSound;
+	private boolean dead;
+	private boolean shooting;
 
-	public Player(OrthographicCamera cam, Ship ship) {
-		this.cam = cam;
+	public Player(OrthographicCamera orthographicCamera, Ship ship) {
+		this.orthographicCamera = orthographicCamera;
 		this.ship = ship;
-		score = SCORE;
-		lives = LIVES;
+		rectangle = ship.getRectangle();
+		texture = ship.getTexture();
+		touchPosition = new Vector3();
+		
+		movementSpeed = MOVEMENTSPEED;
 		health = HEALTH;
+		lives = LIVES;
+		score = SCORE;
 		power = POWER;
-		ship.getRectangle().x = Game.V_WIDTH / 2 - ship.getWidth() / 2;
-		ship.getRectangle().y = 200;
-		ship.setMovementSpeed(MOVEMENTSPEED);
-		this.rectangle = ship.getRectangle();
-		touchPos = new Vector3();
+		startPositionX = Game.V_WIDTH / 2 - rectangle.width / 2;
+		startPositionY = 200;
+		
+		rectangle.x = startPositionX;
+		rectangle.y = startPositionY;
 		
 		pickedUp = false;
-		lostHealth = false;
-		
+		lostHealthSound = false;
+		dead = false;
+		shooting = false;
 	}
-
+	
 	public void update(float dt) {
 		
+		shooting = false;
+		playSound();
+		checkDead();
+
+		if (Gdx.input.isTouched()) {
+			
+			touchPosition.set(Gdx.input.getX(), Gdx.input.getY(), 0); 
+			orthographicCamera.unproject(touchPosition);
+
+			movePlayer(touchPosition, rectangle, dt);
+			checkScreenBounds();
+			
+			
+			shotDelay += 1;
+			if (shotDelay > 8){
+				shotDelay = 0;
+				shooting = true;
+				shot();
+			}
+			
+			
+		}
+	}
+	
+	private void playSound(){
 		if(pickedUp){
 			Resources.Sounds.getPickUp().play();
 			pickedUp = false;
 		}
 		
-		if(lostHealth){
+		if(lostHealthSound){
 			Resources.Sounds.getLostHealth().play();
-			lostHealth = false;
+			lostHealthSound = false;
 		}
-		if (Gdx.input.isTouched()) {
-			
-			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0); 
-			cam.unproject(touchPos);
-
-			if(touchPos.x < ship.getRectangle().x + ship.getWidth() / 2){
-				ship.getRectangle().x -= ship.getMovementSpeed() * dt;
-			}
-			if(touchPos.x > ship.getRectangle().x + ship.getWidth() / 2){
-				ship.getRectangle().x += ship.getMovementSpeed() * dt;
-			}
-			if(touchPos.y < ship.getRectangle().y + ship.getHeight() / 2)
-				ship.getRectangle().y -= ship.getMovementSpeed() * dt;
-			if(touchPos.y > ship.getRectangle().y + ship.getHeight() / 2)
-				ship.getRectangle().y += ship.getMovementSpeed() * dt;
-			
-		}
-		
-		// setting screen bounds
-		if(ship.getRectangle().x < 0) 
-			ship.getRectangle().x = 0;
-	    if(ship.getRectangle().x > Game.V_WIDTH - ship.getRectangle().width) 
-	    	ship.getRectangle().x = Game.V_WIDTH - ship.getRectangle().width;
-	    if(ship.getRectangle().y < 0) 
-	    	ship.getRectangle().y = 0;
-	    if(ship.getRectangle().y > Game.V_HEIGHT - ship.getRectangle().height) 
-	    	ship.getRectangle().y = Game.V_HEIGHT - ship.getRectangle().height;
 	}
 	
+	private void checkDead(){
+		if(health <= 0)
+			dead = true;
+		else
+			dead = false;
+	}
+	
+	private void movePlayer(Vector3 touchPosition, Rectangle rectangle, float dt){
+		if(touchPosition.x < rectangle.x + rectangle.width / 2)
+			rectangle.x -= movementSpeed * dt;
+		if(touchPosition.x > rectangle.x + rectangle.width / 2)
+			rectangle.x += movementSpeed * dt;
+		if(touchPosition.y < rectangle.y + rectangle.height / 2)
+			rectangle.y -= movementSpeed * dt;
+		if(touchPosition.y > rectangle.y + rectangle.height / 2)
+			rectangle.y += movementSpeed * dt;
+	}
+	
+	private void checkScreenBounds(){
+		if(rectangle.x < 0) 
+			rectangle.x = 0;
+	    if(rectangle.x > Game.V_WIDTH - rectangle.width) 
+	    	rectangle.x = Game.V_WIDTH - rectangle.width;
+	    if(rectangle.y < 0) 
+	    	rectangle.y = 0;
+	    if(rectangle.y > Game.V_HEIGHT - rectangle.height) 
+	    	rectangle.y = Game.V_HEIGHT - rectangle.height;
+	}
+	
+	private void shot(){
+		projectile = new Projectile(this);
+	}
+	
+	public void reset(PlayState playState){
+		lives--;
+		health = HEALTH + 1;
+		rectangle.x = startPositionX;
+		rectangle.y = startPositionY;
+		playState.setStart(false);
+	}
+	
+	public void loseHealth(){
+		health -= Meteor.POWER;
+		lostHealthSound = true;
+	}
+	
+	public void addScore(Meteor meteor){
+		if(!meteor.isDestroyed())
+			score += Projectile.HIT_SCORE;
+		else
+			score += meteor.getScore();
+	}
+	
+	public void addScore(RegenPill regenPill){
+		score += regenPill.getScore();
+	}
+	
+	public void addHealth(RegenPill regenPill){
+		if(health < HEALTH)
+			health += regenPill.getPower();
+		if(health >= HEALTH)
+			health = HEALTH;
+		pickedUp = true;
+	}
 
 	public void render(SpriteBatch sb) {
-
 		sb.begin();
-		sb.draw(ship.getTexture(), ship.getRectangle().x, ship.getRectangle().y, ship.getRectangle().width, ship.getRectangle().height);
+		sb.draw(texture, rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 		sb.end();
-
 	}
 	
-	public void setLeftPressed(boolean b) {
-		leftPressed = b;
-	}
-
-	public Texture getTexture() {
-		return texture;
-	}
-
-	public void setTexture(Texture texture) {
-		this.texture = texture;
-	}
-
-	public Rectangle getRectangle() {
-		return rectangle;
-	}
-
-	public void setRectangle(Rectangle rectangle) {
-		this.rectangle = rectangle;
-	}
-
-	public Ship getShip() {
-		return ship;
-	}
-
-	public void setShip(Ship ship) {
-		this.ship = ship;
-	}
-
 	public int getScore() {
 		return score;
 	}
@@ -142,12 +181,35 @@ public class Player extends PlayerObject {
 		this.pickedUp = pickedUp;
 	}
 
-	public boolean isLostHealth() {
-		return lostHealth;
+	public boolean isLostHealthSound() {
+		return lostHealthSound;
 	}
 
-	public void setLostHealth(boolean lostHealth) {
-		this.lostHealth = lostHealth;
+	public void setLostHealthSound(boolean lostHealth) {
+		this.lostHealthSound = lostHealth;
 	}
 
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+
+	public Projectile getProjectile() {
+		return projectile;
+	}
+
+	public void setProjectile(Projectile projectile) {
+		this.projectile = projectile;
+	}
+
+	public boolean isShooting() {
+		return shooting;
+	}
+
+	public void setShooting(boolean shooting) {
+		this.shooting = shooting;
+	}
 }

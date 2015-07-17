@@ -7,21 +7,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.kwing.game.entities.Collision;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.backgrounds.PlayBackground;
 import com.kwing.game.entities.huds.Hud;
 import com.kwing.game.entities.spaceObject.meteors.Meteor;
 import com.kwing.game.entities.spaceObject.player.Player;
-import com.kwing.game.entities.spaceObject.player.Ship;
 import com.kwing.game.entities.spaceObject.powers.RegenPill;
 import com.kwing.game.entities.spaceObject.projectile.Projectile;
+import com.kwing.game.entities.spaceObject.ships.Ship;
 import com.kwing.game.handlers.GameStateManager;
 import com.kwing.game.main.Game;
 
 public class PlayState extends GameState {
 	
-	private Player player;
 	private PlayBackground background;
+	private Player player;
 	private Projectile projectile;
 	private Ship ship;
 	private Meteor meteor;
@@ -37,20 +38,23 @@ public class PlayState extends GameState {
 	private ArrayList<Meteor> meteors;
 	private ArrayList<RegenPill> regenPills;
 	
-	private boolean start = false;
-	
+	private boolean start;
 	private int delayTime;
 	private int spawnTime;
-	private int randomNumber;
+	private int randomPillType;
 	// TODO SKONCZYLEM NA USTAWIANIU FACTORA W KLASIE METEOR, TERAZ TRZEBA DOROBIC
 	// POZIOMY MOCY.
-	public PlayState(GameStateManager gsm, Ship ship){
-		super(gsm);
-		this.ship = ship;
-		
+	public PlayState(GameStateManager gameStateManager){
+		super(gameStateManager);
+	}
+	
+	@Override
+	public void init() {
+		ship = gameStateManager.getShip();
+		player = new Player(orthographicCamera, ship);
 		random = new Random();
 		background = new PlayBackground();
-		player = new Player(orthographicCamera, ship);
+		
 		projectiles = new ArrayList<Projectile>();
 		meteors = new ArrayList<Meteor>();
 		hud = new Hud(player);
@@ -61,153 +65,101 @@ public class PlayState extends GameState {
 		
 		delayTime = 0;
 		spawnTime = 0;
+		start = false;
 		
-		parameter.size = 48;
-		font48 = generator.generateFont(parameter); // font size 12 pixels
-		generator.dispose(); // don't forget to dispose to avoid memory leaks!
-	
+		font48 = generateFont(48);
+		
 	}
 	
-	
-	@Override
-	public void init() {
-		
+	private BitmapFont generateFont(int fontSize){
+		BitmapFont font;
+		parameter.size = fontSize;
+		font = generator.generateFont(parameter);
+		return font;
 	}
 	
 	@Override
 	public void handleInput() {
 		
 	}
+	private void spawnMeteor(){
+		spawnTime += 1;
+		if(spawnTime == 100){
+			meteor = new Meteor(new Random().nextInt(4) + 1, player);
+			meteors.add(meteor);
+			spawnTime = 0;
+		}
+	}
 
 	@Override
 	public void update(float dt) {
 		background.update(dt);
 	
-		
 		if(start && player.getLives() >= 0){
 			player.update(dt);
 			hud.update(dt);
 			
-			if(player.getHealth() <= 0){
-				player.setLives(player.getLives() - 1);
-				player.setHealth(100 + 1);
-				start = false;
+			if(player.isDead()){
+				player.reset(this);
 			}
 			
-			spawnTime += 1;
-			if(spawnTime == 100){
-				meteor = new Meteor(new Random().nextInt(4) + 1, player);
-				meteors.add(meteor);
-				spawnTime = 0;
-			}
-
+			spawnMeteor();
+			
 			for(int i = 0; i < meteors.size(); i++){
-				meteors.get(i).update(dt); // updating meteor 
-			//player>>meteor collision
-				if(player.getRectangle().overlaps(meteors.get(i).getRectangle())){ 
-					
-					player.setHealth(player.getHealth() - 1);
-					player.setLostHealth(true);
-				}
+				meteors.get(i).update(dt);
 				
-				if(meteors.get(i).getRectangle().y < -200){ // removing meteors which reaches lower border
+				if(Collision.checkPlayerTouchedMeteor(player, meteors.get(i)))
+					player.loseHealth();
+				
+				if(!meteors.get(i).isVisible())
 					meteors.remove(i);
-				}
-			}
-			delayTime += 1;
-			if (Gdx.input.isTouched()) {
-			// shooting , creating projectiles
-				if (delayTime > 8){
-					delayTime = 0;
-					projectile = new Projectile(player);
-					projectiles.add(projectile);
-				}
 			}
 			
-		// bullet >> meteor collision
+			if (player.isShooting()) {
+					projectiles.add(player.getProjectile());
+			}
 			for(int i = 0; i < projectiles.size(); i++){
 				projectiles.get(i).update(dt);
-				if(projectiles.get(i).getRectangle().y > Game.V_HEIGHT && projectiles.get(i).isVisible()){
-					projectiles.remove(i);
-					break;
-				}
 				if(meteors.size() > 0)
 					for(int j = 0; j < meteors.size(); j++){
-					// bullet >> meteor collision
-						if(projectiles.get(i).getRectangle().overlaps(meteors.get(j).getRectangle()) && projectiles.get(i).isVisible()){
-							
-							meteors.get(j).setHealth(meteors.get(j).getHealth() - projectiles.get(i).getPower()); // taking meteor hp dependable of projectile power
-							player.setScore(player.getScore() + Projectile.HIT_SCORE); // adding a score when meteor has been hit
-							projectiles.get(i).setVisible(false); // setting bullet invisible for no collison and later removal.
-						
-						// adding score to player
-							if(meteors.get(j).getHealth() < 0){
-								switch(meteors.get(j).getLives()){
-								case 3: 
-									player.setScore(player.getScore() + 10 * meteors.get(j).getFactor());
-									break;
-								case 2: 
-									player.setScore(player.getScore() + 20 * meteors.get(j).getFactor());
-									break;
-								case 1: 
-									player.setScore(player.getScore() + 30 * meteors.get(j).getFactor());
-									break;
-								default:
-										break;
-								}
-								
-								meteors.get(j).setLives(meteors.get(j).getLives() - 1);
-								meteors.get(j).setDestroyed(true);
-								
-								if(meteors.get(j).getLives() == 0){
-								//creating regen pills after full meteor destroy
-									
-									if(random.nextInt(100) + 1 < RegenPill.PILL_CHANCE){
-										randomNumber = random.nextInt(4);
-										regenPill = new RegenPill(meteors.get(j).getRectangle(), randomNumber); // random number 0-3
+						if(Collision.checkProjectileTouchedVisibleMeteor(projectiles.get(i), meteors.get(j)) ){
+							meteors.get(j).loseHealth(projectiles.get(i));
+							player.addScore(meteors.get(j));
+							if(meteors.get(j).checkHealthIsNull()){
+								meteors.get(j).destroy();
+								player.addScore(meteors.get(j));
+								if(meteors.get(j).checkIsAnihilated()){
+									meteors.get(j).playSoundIfDestroyed();
+									if(RegenPill.spawnChance()){
+										regenPill = RegenPill.spawnRandomPill(meteors.get(j));
 										regenPills.add(regenPill);
 									}
-									Resources.Sounds.getMeteorExplosion().play();
 									meteors.remove(j);
 								}
 							}
-						}
-				}
+						}//TODO SPROBOWAC SKROCIC TA CZESC
+					}
+				if(!projectiles.get(i).isVisible())
+					projectiles.remove(i);
 			}
-		//regenPills update and collision
 			if(regenPills.size() > 0){
 				for(int i = 0; i < regenPills.size(); i++){
 					regenPills.get(i).update(dt);
 					
-					if(player.getRectangle().overlaps(regenPills.get(i).getRectangle())){ 
-							
-						player.setPickedUp(true);
-						if(player.getHealth() < 100){ // if health is less than full, then increase it.
-							player.setHealth(player.getHealth() + regenPills.get(i).getPower());
-							if(player.getHealth() > 100) // checking if it isnt reached maximum hp
-								player.setHealth(100);
-						}
-						player.setScore(player.getScore() + regenPills.get(i).getScore()); // adding score dependant of pill type
+					if(Collision.checkPlayerTouchedRegenPill(player, regenPills.get(i))){ 
+						player.addHealth(regenPills.get(i));
+						player.addScore(regenPills.get(i));
 						regenPills.remove(i);
 					}
 				}
 			}
-			
-			for(int i = 0; i < projectiles.size(); i++){
-				if(!projectiles.get(i).isVisible())
-					projectiles.remove(i);
-			}
-			
-			
 		}
 		else{
 			meteors.clear();
 			projectiles.clear();
 			regenPills.clear();
-			player.getRectangle().setPosition(Game.V_WIDTH / 2 - player.getShip().getRectangle().width / 2, 200);
 			delayTime += 1;
 			if (Gdx.input.isTouched()) {
-				
 				if (delayTime > 50){
 					delayTime = 0;
 					start = true;
@@ -229,8 +181,6 @@ public class PlayState extends GameState {
 			spriteBatch.end();
 		}
 		else{
-			
-			
 			for(int i = 0; i < meteors.size(); i++){
 				meteors.get(i).render(spriteBatch);
 			}
@@ -247,8 +197,15 @@ public class PlayState extends GameState {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		generator.dispose();
+	}
+
+	public boolean isStart() {
+		return start;
+	}
+
+	public void setStart(boolean start) {
+		this.start = start;
 	}
 
 

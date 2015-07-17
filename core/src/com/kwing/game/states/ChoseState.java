@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.backgrounds.MenuBackground;
-import com.kwing.game.entities.spaceObject.player.Ship;
+import com.kwing.game.entities.spaceObject.ships.Ship;
 import com.kwing.game.handlers.GameStateManager;
 import com.kwing.game.main.Game;
 
@@ -30,8 +30,8 @@ public class ChoseState extends GameState {
 	private int horizontalSpace;
 	private int spaceBeetwenShips;
 
-	public ChoseState(GameStateManager gsm) {
-		super(gsm);
+	public ChoseState(GameStateManager gameStateManager) {
+		super(gameStateManager);
 	}
 
 	@Override

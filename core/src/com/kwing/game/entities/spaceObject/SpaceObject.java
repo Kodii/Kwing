@@ -8,9 +8,9 @@ public abstract class SpaceObject{
 
 	protected String textureString;
 	protected int width;
-	private int height;
+	protected int height;
 	protected float x, y;
-	private Texture texture;
+	protected Texture texture;
 	protected Rectangle rectangle;
 	protected int movementSpeed;
 	

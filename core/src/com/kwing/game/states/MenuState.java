@@ -15,23 +15,18 @@ import com.kwing.game.main.Game;
 
 public class MenuState extends GameState {
 	
-	private MenuBackground menuBG;
+	private MenuBackground menuBackground;
 	private Menu menu;
 	private Music intro;
 	
-	private boolean leftPressed;
-	
-	
-	public MenuState(GameStateManager gsm){
-		super(gsm);
+	public MenuState(GameStateManager gameStateManager){
+		super(gameStateManager);
 	}
 
 	@Override
 	public void init() {
-		menuBG = new MenuBackground();
+		menuBackground = new MenuBackground();
 		menu = new Menu(orthographicCamera);
-		
-		
 		
 		intro = Resources.Sounds.getIntro();
 		intro.play();
@@ -43,7 +38,7 @@ public class MenuState extends GameState {
 	public void update(float dt) {
 		handleInput();
 		
-		menuBG.update(dt);
+		menuBackground.update(dt);
 		
 		menu.update(dt);
 		
@@ -59,7 +54,7 @@ public class MenuState extends GameState {
 	@Override
 	public void render() {
 		
-		menuBG.render(spriteBatch);
+		menuBackground.render(spriteBatch);
 		menu.render(spriteBatch);
 		
 		
@@ -67,12 +62,11 @@ public class MenuState extends GameState {
 
 	@Override
 	public void handleInput() {
-		menu.setLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
 	}
 
 	@Override
 	public void dispose() {
-		this.dispose();
+//		this.dispose();
 		intro.dispose();
 	}
 

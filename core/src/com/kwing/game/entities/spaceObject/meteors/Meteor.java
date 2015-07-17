@@ -2,12 +2,11 @@ package com.kwing.game.entities.spaceObject.meteors;
 
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
-import com.kwing.game.entities.spaceObject.SpaceObject;
 import com.kwing.game.entities.spaceObject.player.Player;
+import com.kwing.game.entities.spaceObject.projectile.Projectile;
 import com.kwing.game.main.Game;
 
 public class Meteor extends MeteorObject{
@@ -16,17 +15,24 @@ public class Meteor extends MeteorObject{
 	public static final int WIDTH = 150;
 	public static final int HEIGHT = 150;
 	public static final int HEALTH = 100;
+	public static final int POWER = 1;
+	public static final int SCORE = 10;
+	
+	private Random random;
+	private Player player;
 	
 	private int factor;
 	private int type;
 	private boolean destroyed;
 	private boolean left, right;
-	
-	private Random random;
-	private Player player;
+	private boolean visible;
+	private boolean anihilated;
 	
 	public Meteor(int type, Player player){
 		this.type = type;
+		random = new Random();
+		rectangle = new Rectangle();
+		texture = Resources.Textures.getMeteorBrownBig(type);
 		
 		if(player.getScore() > 1000)
 			factor = 2;
@@ -34,84 +40,119 @@ public class Meteor extends MeteorObject{
 			factor = 3;
 		else
 			factor = 1;
-		
-		
-		
 		destroyed = false;
 		movementSpeed = MOVEMENTSPEED;
-		setWidth(WIDTH);
-		setHeight(HEIGHT);
+		width = WIDTH;
+		height = HEIGHT;
 		health = HEALTH * factor;
-		
+		score = SCORE * factor;
 		lives = 3;
-		random = new Random();
-		initObject("PNG/Meteors/meteorBrown_big" + type + ".png", getWidth(), getHeight(), random.nextInt(Game.V_WIDTH - getWidth()) + 1, Game.V_HEIGHT);
+		
+		x = random.nextInt(Game.V_WIDTH - getWidth()) + 1;
+		y = Game.V_HEIGHT;
+		createMeteor(x, y);
+	}
+	
+	private void createMeteor(float x, float y){
+		rectangle.x = x;
+		rectangle.y = y;
+		rectangle.width = width;
+		rectangle.height = height;
 	}
 	
 	public void update(float dt){
+		// meteor movement on screen	
+		playSoundIfDestroyed();
+		move(dt);
 		
-	//
-		if(destroyed)
+		if(destroyed){
+			reduceMeteorToSmaller();
+			setMovementFlag();
+		}
+		
+		checkDownwardBound();
+			
+	}
+	
+	public void playSoundIfDestroyed(){
+		if(destroyed || anihilated)
 			Resources.Sounds.getMeteorExplosion().play();
-	// meteor movement on screen	
-		rectangle.y -= movementSpeed * dt;
-	// lives = 2
-		if(lives == 2 && destroyed){
-			getTexture().dispose();
-			setTexture(new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_med1.png")));
-			rectangle.width = getWidth() / 2 ;
-			rectangle.height = getHeight() / 2;
-			health = HEALTH * factor - 40 * factor;  
-			rectangle.x = x + rectangle.width / 2;
-			movementSpeed += 10;
-			
-			if(random.nextInt(2) + 1 == 1)
-				left = true;
-			else
-				right = true;
-			
-			destroyed = false;
-		}
-		else if(lives == 2 && !destroyed){
+	}
+	
+	private Boolean checkDownwardBound(){
+		if(rectangle.y < 0 - rectangle.height)
+			visible = false;
+		else
+			visible = true;
+		return visible;
+	}
+	
+	private void move(float dt){
+		if(lives > 0 && !destroyed){
 			rectangle.y -= movementSpeed * dt;
-			
 			if(right)
 				rectangle.x += movementSpeed * dt;
 			else if(left){
 				rectangle.x -= movementSpeed * dt;
 			}
-			
-			
 		}
-		
-		// lives = 1
-		if(lives == 1 && destroyed){
-			getTexture().dispose();
-			setTexture(new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_small1.png")));
-			left = false;
-			right = false;
-			rectangle.width = getWidth() / 4;
-			rectangle.height = getHeight() / 4;
+	}
+	
+	private void reduceMeteorToSmaller(){
+		if(lives == 2){
+			texture = Resources.Textures.getMeteorBrownMedium();
+			health = HEALTH * factor - 40 * factor;
+			score += (SCORE + 10) * factor;
+		}
+		if(lives == 1){
+			texture = Resources.Textures.getMeteorBrownSmall();
 			health = HEALTH * factor - 60 * factor;
-			movementSpeed += 10;
-			
-			if(random.nextInt(2) + 1 == 1)
-				left = true;
-			else
-				right = true;
-			
-			destroyed = false;
+			score += (SCORE + 20) * factor;
 		}
-		else if(lives == 1 && !destroyed){
-			rectangle.y -= movementSpeed * dt;
-			
-			if(right)
-				rectangle.x += movementSpeed * dt;
-			else if(left){
-				rectangle.x -= movementSpeed * dt;
-			}
-		}
+		rectangle.width = rectangle.width / 2;
+		rectangle.height = rectangle.height / 2;
+		rectangle.x = rectangle.x + rectangle.width / 2;
+		movementSpeed += 20;
+		destroyed = false;
+	}
+	
+	private void setMovementFlag(){
+		if(destroyed)
+			left = false;
+		else
+			right = false;
 		
+		if(random.nextInt(2) == 1)
+			left = true;
+		else
+			right = true;
+	}
+	
+	public void loseHealth(Projectile projectile){
+		health -= projectile.getPower();
+		projectile.setVisible(false);
+	}
+	
+	public Boolean checkHealthIsNull(){
+		boolean statement;
+		if(health < 0)
+			statement = true;
+		else
+			statement = false;
+		return statement;
+	}
+	
+	public Boolean checkIsAnihilated(){
+		if(lives <= 0)
+			anihilated = true;
+		else 
+			anihilated = false;
+		return anihilated;
+	}
+	
+	public void destroy(){
+		lives -= 1;
+		destroyed = true;
 	}
 	
 	public void render(SpriteBatch sb){
@@ -135,4 +176,15 @@ public class Meteor extends MeteorObject{
 	public void setFactor(int factor) {
 		this.factor = factor;
 	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	
+
 }

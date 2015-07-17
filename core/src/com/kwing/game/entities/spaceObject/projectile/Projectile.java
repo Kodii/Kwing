@@ -6,8 +6,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.spaceObject.SpaceObject;
 import com.kwing.game.entities.spaceObject.player.Player;
-import com.kwing.game.entities.spaceObject.player.Ship;
 import com.kwing.game.entities.spaceObject.powers.PowerObject;
+import com.kwing.game.entities.spaceObject.ships.Ship;
+import com.kwing.game.main.Game;
 
 public class Projectile extends PowerObject{
 	
@@ -17,7 +18,6 @@ public class Projectile extends PowerObject{
 	
 	private Rectangle rectangle;
 	private Player player;
-	private Ship ship;
 	private Sound shotSound;
 	private boolean visible;
 	
@@ -32,7 +32,6 @@ public class Projectile extends PowerObject{
 		visible = true;
 		movementSpeed = SPEED;
 		power = player.getPower();
-		ship = player.getShip();
 		
 		if(player.getPower() <= 20)
 			setTexture(Resources.Textures.getLaserBlue1());
@@ -42,8 +41,8 @@ public class Projectile extends PowerObject{
 		
 		rectangle = new Rectangle();
 		
-		rectangle.x = ship.getRectangle().x + ship.getRectangle().width / 2 - 6;
-		rectangle.y = ship.getRectangle().y + ship.getRectangle().height;
+		rectangle.x = player.getRectangle().x + player.getRectangle().width / 2 - 6;
+		rectangle.y = player.getRectangle().y + player.getRectangle().height;
 		rectangle.width = getTexture().getWidth();
 		rectangle.height = getTexture().getHeight();
 		
@@ -54,6 +53,15 @@ public class Projectile extends PowerObject{
 	
 	public void update(float dt){
 		rectangle.y += movementSpeed * dt;
+		checkUpperBound();
+	}
+	
+	private Boolean checkUpperBound(){
+		if(rectangle.y > Game.V_HEIGHT && visible)
+			visible = false;
+		else
+			visible = true;
+		return visible;
 	}
 	
 	public void render(SpriteBatch sb){

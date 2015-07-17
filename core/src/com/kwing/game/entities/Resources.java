@@ -31,7 +31,12 @@ public class Resources {
 		private static Texture laserBlue5 = new Texture(Gdx.files.internal("Lasers/laserBlue5.png"));
 		private static Texture laserBlue6 = new Texture(Gdx.files.internal("Lasers/laserBlue6.png"));
 		
-		
+		private static Texture meteorBrownBig1 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big1.png"));
+		private static Texture meteorBrownBig2 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big2.png"));
+		private static Texture meteorBrownBig3 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big3.png"));
+		private static Texture meteorBrownBig4 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big4.png"));
+		private static Texture meteorBrownMedium = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_med1.png"));
+		private static Texture meteorBrownSmall = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_small1.png"));
 		
 		public static Texture getBackground() {
 			return background;
@@ -93,6 +98,20 @@ public class Resources {
 		public static void setPillYellow(Texture pillYellow) {
 			Textures.pillYellow = pillYellow;
 		}
+		public static Texture getPill(int type){
+			switch(type){
+			case 1:
+				return Textures.pillBlue;
+			case 2:
+				return Textures.pillGreen;
+			case 3:
+				return Textures.pillYellow;
+			case 4:
+				return Textures.pillRed;
+			default:
+				return null;
+			}
+		}
 		public static Texture getLaserBlue1() {
 			return laserBlue1;
 		}
@@ -113,6 +132,56 @@ public class Resources {
 		}
 		public static Texture getLaserBlue4() {
 			return laserBlue4;
+		}
+		public static Texture getMeteorBrownBig1() {
+			return meteorBrownBig1;
+		}
+		public static void setMeteorBrownBig1(Texture meteorBrownBig1) {
+			Textures.meteorBrownBig1 = meteorBrownBig1;
+		}
+		public static Texture getMeteorBrownBig2() {
+			return meteorBrownBig2;
+		}
+		public static void setMeteorBrownBig2(Texture meteorBrownBig2) {
+			Textures.meteorBrownBig2 = meteorBrownBig2;
+		}
+		public static Texture getMeteorBrownBig3() {
+			return meteorBrownBig3;
+		}
+		public static void setMeteorBrownBig3(Texture meteorBrownBig3) {
+			Textures.meteorBrownBig3 = meteorBrownBig3;
+		}
+		public static Texture getMeteorBrownBig4() {
+			return meteorBrownBig4;
+		}
+		public static void setMeteorBrownBig4(Texture meteorBrownBig4) {
+			Textures.meteorBrownBig4 = meteorBrownBig4;
+		}
+		public static Texture getMeteorBrownBig(int type){
+			switch(type){
+			case 1:
+				return Textures.meteorBrownBig1;
+			case 2:
+				return Textures.meteorBrownBig2;
+			case 3:
+				return Textures.meteorBrownBig3;
+			case 4:
+				return Textures.meteorBrownBig4;
+			default:
+				return null;
+			}
+		}
+		public static Texture getMeteorBrownMedium() {
+			return meteorBrownMedium;
+		}
+		public static void setMeteorBrownMedium(Texture meteorBrownMedium) {
+			Textures.meteorBrownMedium = meteorBrownMedium;
+		}
+		public static Texture getMeteorBrownSmall() {
+			return meteorBrownSmall;
+		}
+		public static void setMeteorBrownSmall(Texture meteorBrownSmall) {
+			Textures.meteorBrownSmall = meteorBrownSmall;
 		}
 		public static void setLaserBlue4(Texture laserBlue4) {
 			Textures.laserBlue4 = laserBlue4;

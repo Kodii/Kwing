@@ -7,6 +7,7 @@ public abstract class MeteorObject extends SpaceObject {
 	protected int health;
 	protected int lives;
 	protected int power;
+	protected int score;
 
 	public int getHealth() {
 		return health;
@@ -25,6 +26,12 @@ public abstract class MeteorObject extends SpaceObject {
 	}
 	public void setPower(int power) {
 		this.power = power;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 	
 }
