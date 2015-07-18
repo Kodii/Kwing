@@ -17,7 +17,6 @@ public abstract class GameState {
 		game = gameStateManager.getGame();
 		spriteBatch = game.getSpriteBatch();
 		orthographicCamera = game.getCamera();
-		init();
 	}
 	
 	
