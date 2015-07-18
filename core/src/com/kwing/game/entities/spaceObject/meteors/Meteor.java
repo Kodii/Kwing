@@ -47,6 +47,7 @@ public class Meteor extends MeteorObject{
 		health = HEALTH * factor;
 		score = SCORE * factor;
 		lives = 3;
+		visible = true;
 		
 		x = random.nextInt(Game.V_WIDTH - getWidth()) + 1;
 		y = Game.V_HEIGHT;

@@ -31,10 +31,10 @@ public class Resources {
 		private static Texture laserBlue5 = new Texture(Gdx.files.internal("Lasers/laserBlue5.png"));
 		private static Texture laserBlue6 = new Texture(Gdx.files.internal("Lasers/laserBlue6.png"));
 		
-		private static Texture meteorBrownBig1 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big1.png"));
-		private static Texture meteorBrownBig2 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big2.png"));
-		private static Texture meteorBrownBig3 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big3.png"));
-		private static Texture meteorBrownBig4 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_Big4.png"));
+		private static Texture meteorBrownBig1 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_big1.png"));
+		private static Texture meteorBrownBig2 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_big2.png"));
+		private static Texture meteorBrownBig3 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_big3.png"));
+		private static Texture meteorBrownBig4 = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_big4.png"));
 		private static Texture meteorBrownMedium = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_med1.png"));
 		private static Texture meteorBrownSmall = new Texture(Gdx.files.internal("PNG/Meteors/meteorBrown_small1.png"));
 		
