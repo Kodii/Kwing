@@ -35,6 +35,7 @@ public class Menu {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 128;
+		// TODO NIE MOZE BYC GENEROWANIA TEJ CZCIONKI BO ZARYWA BACKGROUUND....
 		parameter.borderWidth = 2;
 		parameter.borderColor = Color.GRAY;
 		parameter.shadowColor = Color.BLACK;

@@ -55,6 +55,7 @@ public class MenuState extends GameState {
 	public void render() {
 		
 		menuBackground.render(spriteBatch);
+		
 		menu.render(spriteBatch);
 		
 		
