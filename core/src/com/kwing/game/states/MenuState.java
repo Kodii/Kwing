@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.kwing.game.database.DatabaseConnection;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.backgrounds.MenuBackground;
 import com.kwing.game.entities.menu.Menu;
@@ -67,7 +68,6 @@ public class MenuState extends GameState {
 
 	@Override
 	public void dispose() {
-//		this.dispose();
 		intro.dispose();
 	}
 

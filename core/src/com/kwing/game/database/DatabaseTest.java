@@ -2,6 +2,7 @@ package com.kwing.game.database;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.sql.Database;
+import com.badlogic.gdx.sql.DatabaseCursor;
 import com.badlogic.gdx.sql.DatabaseFactory;
 import com.badlogic.gdx.sql.SQLiteGdxException;
 
@@ -20,7 +21,7 @@ public class DatabaseTest {
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table if not exists "
 			+ TABLE_SCORES + "(" + COLUMN_ID + " integer primary key autoincrement, "
-			+ COLUMN_NAME + " text not null, " + COLUMN_SCORE + " Integer not null);";
+			+ COLUMN_NAME + " text not null, " + COLUMN_SCORE + " integer not null);";
 	
 	public DatabaseTest(){
 		Gdx.app.log("DatabaseTest", "creation started");
@@ -36,8 +37,29 @@ public class DatabaseTest {
 		
 		Gdx.app.log("DatabaseTest", "created successfilly");
 		
+		try{
+			dbHandler.execSQL("INSERT INTO scores ('name', score) VALUES ('test', 123)");
+		} catch (SQLiteGdxException e){
+			e.printStackTrace();
+		}
 		
+		DatabaseCursor cursor = null;
 		
+		try{
+			cursor = dbHandler.rawQuery("SELECT * FROM scores");
+		}catch(SQLiteGdxException e){
+			e.printStackTrace();
+		}
+		
+		while (cursor.next()) {
+			System.out.println(String.valueOf(cursor.getInt(2)));
+		}
+		
+		try {
+			cursor = dbHandler.rawQuery(cursor, "SELECT * FROM scores");
+		} catch (SQLiteGdxException e) {
+			e.printStackTrace();
+		}
 		
 	
 	}

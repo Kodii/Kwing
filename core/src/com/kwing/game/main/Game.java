@@ -5,6 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.kwing.game.database.DatabaseConnection;
+import com.kwing.game.database.DatabaseInsert;
+import com.kwing.game.database.DatabaseSelect;
 import com.kwing.game.database.DatabaseTest;
 import com.kwing.game.handlers.GameInputProcessor;
 import com.kwing.game.handlers.GameStateManager;
@@ -34,7 +37,9 @@ public class Game implements ApplicationListener {
 		
 		gsm = new GameStateManager(this);
 		
-		DatabaseTest db = new DatabaseTest();
+		DatabaseConnection.connect();
+		DatabaseInsert.insertScore("Kodi", 123321);
+		System.out.println(DatabaseSelect.getScoreById(DatabaseSelect.getScoresId() - 1).get(DatabaseConnection.COLUMN_SCORE));
 	}
 
 	@Override
@@ -66,8 +71,7 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		DatabaseConnection.dispose();
 	}
 	
 	public SpriteBatch getSpriteBatch(){
