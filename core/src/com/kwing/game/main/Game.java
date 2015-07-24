@@ -37,9 +37,9 @@ public class Game implements ApplicationListener {
 		
 		gsm = new GameStateManager(this);
 		
-		DatabaseConnection.connect();
-		DatabaseInsert.insertScore("Kodi", 123321);
-		System.out.println(DatabaseSelect.getScoreById(DatabaseSelect.getScoresId() - 1).get(DatabaseConnection.COLUMN_SCORE));
+//		DatabaseConnection.connect();
+//		DatabaseInsert.insertScore("Kodi", 123321);
+//		System.out.println(DatabaseSelect.getScoreById(DatabaseSelect.getScoresId() - 1).get(DatabaseConnection.COLUMN_SCORE));
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void dispose() {
-		DatabaseConnection.dispose();
+//		DatabaseConnection.dispose();
 	}
 	
 	public SpriteBatch getSpriteBatch(){
