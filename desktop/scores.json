@@ -1,0 +1,16 @@
+{
+scores: [
+	{
+		class: Score
+		id: 1
+		name: kodik
+		score: 1234
+	}
+	{
+		class: Score
+		id: 2
+		name: kodi
+		score: 123
+	}
+]
+}
