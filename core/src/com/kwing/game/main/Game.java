@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.kwing.game.entities.database.DatabaseTest;
+import com.kwing.game.database.DatabaseTest;
 import com.kwing.game.handlers.GameInputProcessor;
 import com.kwing.game.handlers.GameStateManager;
 

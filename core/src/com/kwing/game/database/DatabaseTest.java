@@ -1,4 +1,4 @@
-package com.kwing.game.entities.database;
+package com.kwing.game.database;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.sql.Database;
