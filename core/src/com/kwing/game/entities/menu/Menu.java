@@ -1,59 +1,61 @@
 package com.kwing.game.entities.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.kwing.game.database.DatabaseConnection;
-import com.kwing.game.database.DatabaseInsert;
-import com.kwing.game.database.DatabaseSelect;
+import com.kwing.game.entities.Resources;
+import com.kwing.game.handlers.GameStateManager;
 import com.kwing.game.main.Game;
 
 public class Menu {
+	
+	private static final int TITLE_WIDTH = Game.V_WIDTH / 2;
+	private static final int TITLE_HEIGHT = 87;
 
+	private Texture titleTexture;
+	private Rectangle titleRectangle;
+	
 	private Texture startTexture;
-	private Rectangle startButton;
+	private Rectangle startRectangle;
+	
+	private Texture scoreTexture;
+	private Rectangle scoreRectangle;
+	
 	private Vector3 touchPos;
 	private OrthographicCamera cam;
-	private BitmapFont font128;
 
-	private boolean leftPressed;
-	private boolean state;
+	private int state;
 	
 	public Menu(OrthographicCamera cam) {
 
 		this.cam = cam;
-		state = false;
+		state = -1;
 		
 		touchPos = new Vector3();
 		
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 128;
-		// TODO NIE MOZE BYC GENEROWANIA TEJ CZCIONKI BO ZARYWA BACKGROUUND....
-		parameter.borderWidth = 2;
-		parameter.borderColor = Color.GRAY;
-		parameter.shadowColor = Color.BLACK;
-		parameter.shadowOffsetX = -5;
-		parameter.shadowOffsetY = -10;
-		font128 = generator.generateFont(parameter); // font size 12 pixels
-		generator.dispose(); // don't forget to dispose to avoid memory leaks!
-
-		startTexture = new Texture(Gdx.files.internal("button.png"));
-		startButton = new Rectangle();
-
-		// Centering image (Game.V_HEIGHT / 2 * Game.SCALE +- half of its
-		// width/height
-		startButton.width = 200;
-		startButton.height = 52;
-		startButton.x = Game.V_WIDTH / 2 - startButton.width / 2;
-		startButton.y = Game.V_HEIGHT / 2 - startButton.height / 2;
+		titleTexture = Resources.Textures.getTitle();
+		titleRectangle = new Rectangle();
+		titleRectangle.width = TITLE_WIDTH;
+		titleRectangle.height = TITLE_HEIGHT;
+		titleRectangle.x = Game.V_WIDTH / 2 - titleRectangle.width / 2;
+		titleRectangle.y = Game.V_HEIGHT - titleRectangle.height * 4;
+		
+		startTexture = Resources.Textures.getStartButton();
+		startRectangle = new Rectangle();
+		startRectangle.width = 200;
+		startRectangle.height = 78;
+		startRectangle.x = Game.V_WIDTH / 2 - startRectangle.width / 2;
+		startRectangle.y = Game.V_HEIGHT / 2 - startRectangle.height / 2;
+		
+		scoreTexture = Resources.Textures.getScoreButton();
+		scoreRectangle = new Rectangle();
+		scoreRectangle.width = 200;
+		scoreRectangle.height = 78;
+		scoreRectangle.x = Game.V_WIDTH / 2 - startRectangle.width / 2;
+		scoreRectangle.y = startRectangle.y - scoreRectangle.height - 20;
 
 	}
 
@@ -64,44 +66,43 @@ public class Menu {
 
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			cam.unproject(touchPos);
-			System.out.println(startButton.y);
-			System.out.println(touchPos.x + " " + touchPos.y);
 
-			if (touchPos.x > startButton.x
-					&& touchPos.x < (startButton.x + startButton.width)
-					&& touchPos.y > (startButton.y)
-					&& touchPos.y < (startButton.y + startButton.height)) {
-				state = true;
+			if (touchPos.x > startRectangle.x
+					&& touchPos.x < (startRectangle.x + startRectangle.width)
+					&& touchPos.y > (startRectangle.y)
+					&& touchPos.y < (startRectangle.y + startRectangle.height)) {
+				state = GameStateManager.CHOSESTATE;
 			}
-//			if (touchPos.x > startButton.x
-//					&& touchPos.x < (startButton.x + startButton.width)
-//					&& touchPos.y > (startButton.y)
-//					&& touchPos.y < (startButton.y + startButton.height)) {
-//				&& touchPos.y > (startButton.y - startButton.height)
-//				state = true;
-//				System.out.println("ship2");
-//			}
-
+			
+			if (touchPos.x > scoreRectangle.x
+					&& touchPos.x < (scoreRectangle.x + scoreRectangle.width)
+					&& touchPos.y > (scoreRectangle.y)
+					&& touchPos.y < (scoreRectangle.y + scoreRectangle.height)) {
+				state = GameStateManager.SCORESTATE;
+			}
 		}
 	}
 
 	public void render(SpriteBatch sb) {
 
 		sb.begin();
-		sb.draw(startTexture, startButton.x, startButton.y, startButton.width,
-				startButton.height);
-		font128.draw(sb, "KWING", Game.V_WIDTH / 2 - 240, Game.V_HEIGHT - 200);
+		sb.draw(titleTexture, titleRectangle.x, titleRectangle.y, titleRectangle.width
+				, titleRectangle.height);
+		sb.draw(startTexture, startRectangle.x, startRectangle.y, startRectangle.width,
+				startRectangle.height);
+		sb.draw(scoreTexture, scoreRectangle.x, scoreRectangle.y, scoreRectangle.width,
+				scoreRectangle.height);
+		
 		sb.end();
 
 	}
 
-	public void setLeftPressed(boolean b) {
-		leftPressed = b;
-	}
-	public boolean getState(){
+	public int getState() {
 		return state;
 	}
-	public void setState(boolean b){
-		state = b;
+
+	public void setState(int state) {
+		this.state = state;
 	}
+
 }

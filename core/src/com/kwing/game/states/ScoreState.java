@@ -2,12 +2,9 @@ package com.kwing.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.backgrounds.ScoreBackground;
 import com.kwing.game.entities.score.ScoreBoard;
@@ -26,23 +23,37 @@ public class ScoreState extends GameState {
 	private FreeTypeFontParameter parameter;
 	private BitmapFont font48;
 	
-	public ScoreState(GameStateManager gameStateManager) {
+	private int state;
+	
+	public ScoreState(GameStateManager gameStateManager, int state) {
 		super(gameStateManager);
+		this.state = state;
+		init(this.state);
 	}
-
+	
 	@Override
 	public void init() {
+		
+	}
+
+	public void init(int state) {
 		scoreBackground = new ScoreBackground();
-		
-		listener = new MyTextInputListener(gameStateManager.getPlayer());
-		Gdx.input.getTextInput(listener, "Write your name", "", "NAME");
-		
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
 		parameter = new FreeTypeFontParameter();
 		
 		font48 = generateFont(48);
 		
 		Resources.Sounds.getScoreStateMusic().play();
+		
+		if(state == GameStateManager.PLAYSTATE){
+			listener = new MyTextInputListener(gameStateManager.getPlayer());
+			Gdx.input.getTextInput(listener, "Write your name", "", "NAME");
+		}
+		if(state == GameStateManager.MENUSTATE){
+			scoreBoard = new ScoreBoard();
+		}
+		
+		
 	}
 	
 	private BitmapFont generateFont(int fontSize){
@@ -59,29 +70,42 @@ public class ScoreState extends GameState {
 		if(!Resources.Sounds.getScoreStateMusic().isPlaying())
 			gameStateManager.setState(GameStateManager.MENUSTATE);
 		
-		if(listener.getName() != null){
-			scoreBoard = new ScoreBoard();
+		if(state == GameStateManager.PLAYSTATE){
+			if(listener.getName() != null){
+				scoreBoard = new ScoreBoard();
+			}
+			
+			if(!listener.isProcessing()){
+				scoreBoard.update(dt);
+				listener.setName(null); // reseting field to stop creating whole time scoreBoard object
+			}
 		}
 		
-		if(!listener.isProcessing()){
+		if(state == GameStateManager.MENUSTATE)
 			scoreBoard.update(dt);
-			listener.setName(null); // reseting field to stop creating whole time scoreBoard object
-		}
+		
 		
 	}
 
 	@Override
 	public void render() {
 		scoreBackground.render(spriteBatch);
-		
-		if(!listener.isProcessing()){
+		if(state == GameStateManager.PLAYSTATE && !listener.isProcessing()){
 			scoreBoard.render(spriteBatch);
-			
-			spriteBatch.begin();
-			font48.draw(spriteBatch, "SCORES", 100, Game.V_HEIGHT - 100);
-			spriteBatch.end();
+			renderScoreText(spriteBatch);
 		}
 		
+		if(state == GameStateManager.MENUSTATE){
+			scoreBoard.render(spriteBatch);
+			renderScoreText(spriteBatch);
+		}
+		
+	}
+	
+	private void renderScoreText(SpriteBatch spriteBatch){
+		spriteBatch.begin();
+		font48.draw(spriteBatch, "SCORES", 100, Game.V_HEIGHT - 100);
+		spriteBatch.end();
 	}
 	
 	@Override
@@ -93,5 +117,4 @@ public class ScoreState extends GameState {
 	public void dispose() {
 		generator.dispose();
 	}
-
 }

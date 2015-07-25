@@ -3,7 +3,11 @@ package com.kwing.game.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 public class Resources {
 	
@@ -15,6 +19,10 @@ public class Resources {
 		
 		private static Texture background = new Texture(Gdx.files.internal("Backgrounds/purple.png"));
 		private static Texture backgroundBlue = new Texture(Gdx.files.internal("Backgrounds/blue.png"));
+		private static Texture title = new Texture(Gdx.files.internal("PNG/title.png"));
+		private static Texture startButton = new Texture(Gdx.files.internal("PNG/Buttons/startButton.png"));
+		private static Texture scoreButton = new Texture(Gdx.files.internal("PNG/Buttons/scoreButton.png"));
+		
 		
 		private static Texture playerShipBlue1 = new Texture(Gdx.files.internal("PNG/playerShip1_blue.png"));
 		private static Texture playerShipBlue2 = new Texture(Gdx.files.internal("PNG/playerShip2_blue.png"));
@@ -50,6 +58,24 @@ public class Resources {
 		}
 		public static void setBackgroundBlue(Texture backgroundBlue) {
 			Textures.backgroundBlue = backgroundBlue;
+		}
+		public static Texture getTitle() {
+			return title;
+		}
+		public static void setTitle(Texture title) {
+			Textures.title = title;
+		}
+		public static Texture getStartButton() {
+			return startButton;
+		}
+		public static void setStartButton(Texture startButton) {
+			Textures.startButton = startButton;
+		}
+		public static Texture getScoreButton() {
+			return scoreButton;
+		}
+		public static void setScoreButton(Texture scoreButton) {
+			Textures.scoreButton = scoreButton;
 		}
 		public static Texture getPlayerShipBlue1() {
 			return playerShipBlue1;
@@ -260,17 +286,5 @@ public class Resources {
 		public static void setMeteorExplosion(Sound meteorExplosion) {
 			Sounds.meteorExplosion = meteorExplosion;
 		}
-		
 	}
-	
-	
-	
-	public static class Fonts{
-		
-
-		
-		
-	}
-	
-
 }

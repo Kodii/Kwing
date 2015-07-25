@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kwing.game.entities.spaceObject.player.Player;
 import com.kwing.game.entities.spaceObject.ships.Ship;
 import com.kwing.game.main.Game;
+import com.kwing.game.states.BlankState;
 import com.kwing.game.states.ChoseState;
 import com.kwing.game.states.GameState;
 import com.kwing.game.states.MenuState;
@@ -29,6 +30,11 @@ public class GameStateManager {
 	public GameStateManager(Game game) {
 		this.game = game;
 		gameStates = new ArrayList<GameState>();
+		
+		for(int i = 0; i < 4; i++){
+			gameStates.add(new BlankState(this));
+		}
+		
 		currentState = MENUSTATE;
 		gameStates.add(MENUSTATE, new MenuState(this));
 		setState(MENUSTATE);
@@ -41,10 +47,13 @@ public class GameStateManager {
 	
 	public void addState(int state){
 		if(state == MENUSTATE){
-			gameStates.add(MENUSTATE, new MenuState(this));
+			gameStates.set(MENUSTATE, new MenuState(this));
 		}
 		if(state == CHOSESTATE){
-			gameStates.add(CHOSESTATE,  new ChoseState(this));
+			gameStates.set(CHOSESTATE,  new ChoseState(this));
+		}
+		if(state == SCORESTATE){
+			gameStates.set(SCORESTATE,  new ScoreState(this, MENUSTATE));
 		}
 		
 	}
@@ -52,14 +61,14 @@ public class GameStateManager {
 	public void addState(int state, Ship ship){
 		if(state == PLAYSTATE){
 			this.ship = ship;
-			gameStates.add(PLAYSTATE, new PlayState(this));
+			gameStates.set(PLAYSTATE, new PlayState(this));
 		}
 	}
 	
 	public void addState(int state, Player player){
 		if(state == SCORESTATE){
 			this.player= player;
-			gameStates.add(SCORESTATE, new ScoreState(this));
+			gameStates.set(SCORESTATE, new ScoreState(this, PLAYSTATE));
 		}
 	}
 	

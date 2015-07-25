@@ -14,19 +14,23 @@ import com.kwing.game.main.Game;
 
 public class ScoreBoard {
 	
+	private static final int MAX_SCORES = 10;
+	
 	private ArrayList<Score> scores;
-	private ArrayList<Score> hiScores;
 	private Score playerScore;
 	
 	private FreeTypeFontGenerator generator;
 	private FreeTypeFontParameter parameter;
 	private BitmapFont font24;
-	
+
+	private int maxScores;
 	public ScoreBoard(){
 		scores = new ArrayList<Score>();
-		hiScores = new ArrayList<Score>();
 		creatingScoreBoard();
 		
+		if(maxScores >= MAX_SCORES)
+			maxScores = MAX_SCORES;
+			
 		
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future_thin.ttf"));
 		parameter = new FreeTypeFontParameter();
@@ -34,9 +38,9 @@ public class ScoreBoard {
 		font24 = generateFont(24);
 		generator.dispose();
 		
-		for(int i = 0; i < scores.size(); i++){
-			scores.get(i).print();
-		}
+//		for(int i = 0; i < scores.size(); i++){
+//			scores.get(i).print();
+//		}
 	}
 	
 	private void creatingScoreBoard(){
@@ -50,6 +54,7 @@ public class ScoreBoard {
 				scores.add(playerScore);
 			}
 		DatabaseConnection.dispose();
+		maxScores = scores.size();
 		creatingHighestScoreBoard(scores);
 	}
 	
@@ -80,13 +85,12 @@ public class ScoreBoard {
 	}
 	
 	public void update(float dt){
-			
 	}
 	
 	public void render(SpriteBatch spriteBatch){
 		spriteBatch.begin();
 		
-		for(int i = 0; i < scores.size(); i++){
+		for(int i = 0; i < maxScores; i++){
 			font24.setColor(Color.WHITE);
 			font24.draw(spriteBatch, Integer.toString(i + 1) + ". ", 100, (Game.V_HEIGHT - 200) - i * 40);
 			font24.setColor(Color.YELLOW);
