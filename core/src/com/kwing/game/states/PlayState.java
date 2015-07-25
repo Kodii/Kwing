@@ -13,6 +13,7 @@ import com.kwing.game.entities.backgrounds.PlayBackground;
 import com.kwing.game.entities.huds.Hud;
 import com.kwing.game.entities.spaceObject.meteors.Meteor;
 import com.kwing.game.entities.spaceObject.player.Player;
+import com.kwing.game.entities.spaceObject.powers.PowerUp;
 import com.kwing.game.entities.spaceObject.powers.RegenPill;
 import com.kwing.game.entities.spaceObject.projectile.Projectile;
 import com.kwing.game.entities.spaceObject.ships.Ship;
@@ -28,6 +29,7 @@ public class PlayState extends GameState {
 	private Meteor meteor;
 	private Hud hud;
 	private RegenPill regenPill;
+	private PowerUp powerUp;
 	private Random random;
 	
 	private FreeTypeFontGenerator generator;
@@ -37,6 +39,7 @@ public class PlayState extends GameState {
 	private ArrayList<Projectile> projectiles;
 	private ArrayList<Meteor> meteors;
 	private ArrayList<RegenPill> regenPills;
+	private ArrayList<PowerUp> powerUps;
 	
 	private boolean start;
 	private int delayTime;
@@ -59,9 +62,10 @@ public class PlayState extends GameState {
 		meteors = new ArrayList<Meteor>();
 		hud = new Hud(player);
 		regenPills = new ArrayList<RegenPill>();
+		powerUps = new ArrayList<PowerUp>();
+		
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("Bonus/kenvector_future.ttf"));
 		parameter = new FreeTypeFontParameter();
-		
 		
 		delayTime = 0;
 		spawnTime = 0;
@@ -130,9 +134,17 @@ public class PlayState extends GameState {
 								player.addScore(meteors.get(j));
 								if(meteors.get(j).checkIsAnihilated()){
 									meteors.get(j).playSoundIfDestroyed();
-									if(RegenPill.spawnChance()){
-										regenPill = RegenPill.spawnRandomPill(meteors.get(j));
-										regenPills.add(regenPill);
+									
+									if(random.nextInt(2) + 1 == 1){
+										if(RegenPill.spawnChance()){
+											regenPill = RegenPill.spawnRandomPill(meteors.get(j));
+											regenPills.add(regenPill);
+										}
+									}else{
+										if(PowerUp.spawnChance()){
+											powerUp = PowerUp.spawnPowerUp(meteors.get(j));
+											powerUps.add(powerUp);
+										}
 									}
 									meteors.remove(j);
 								}

@@ -53,7 +53,7 @@ public class RegenPill extends PowerObject{
 		sb.end();
 	}
 	
-	public static Boolean spawnChance(){
+	public static boolean spawnChance(){
 		boolean statement;
 		if(Math.random() * 100 < PILL_CHANCE)
 			statement = true;
