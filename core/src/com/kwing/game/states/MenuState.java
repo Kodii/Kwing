@@ -1,18 +1,12 @@
 package com.kwing.game.states;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.kwing.game.database.DatabaseConnection;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.backgrounds.MenuBackground;
 import com.kwing.game.entities.menu.Menu;
 import com.kwing.game.handlers.GameStateManager;
-import com.kwing.game.main.Game;
 
 public class MenuState extends GameState {
 	
@@ -26,13 +20,13 @@ public class MenuState extends GameState {
 
 	@Override
 	public void init() {
-		menuBackground = new MenuBackground();
 		menu = new Menu(orthographicCamera);
+		menuBackground = new MenuBackground();
 		
 		intro = Resources.Sounds.getIntro();
 		intro.play();
 		intro.setLooping(true);
-	
+		
 	}
 
 	@Override
@@ -43,11 +37,15 @@ public class MenuState extends GameState {
 		
 		menu.update(dt);
 		
-		if(menu.getState()){
+		if(menu.getState() == GameStateManager.CHOSESTATE){
 			gameStateManager.addState(GameStateManager.CHOSESTATE);
 			gameStateManager.setState(GameStateManager.CHOSESTATE);
-			menu.setState(false);
-			
+			intro.stop();
+		}
+		
+		if(menu.getState() == GameStateManager.SCORESTATE){
+			gameStateManager.addState(GameStateManager.SCORESTATE);
+			gameStateManager.setState(GameStateManager.SCORESTATE);
 			intro.stop();
 		}
 	}

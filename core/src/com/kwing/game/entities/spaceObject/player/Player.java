@@ -17,7 +17,7 @@ public class Player extends PlayerObject {
 	
 	public static final int MOVEMENTSPEED = 250;
 	public static final int HEALTH = 100;
-	public static final int LIVES = 3;
+	public static final int LIVES = 0;
 	public static final int SCORE = 0;
 	public static final int POWER = 20;
 	

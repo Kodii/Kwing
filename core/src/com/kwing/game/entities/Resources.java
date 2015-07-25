@@ -3,7 +3,11 @@ package com.kwing.game.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 public class Resources {
 	
@@ -14,6 +18,11 @@ public class Resources {
 		public static final int SHIP_BLUE3 = 3;*/
 		
 		private static Texture background = new Texture(Gdx.files.internal("Backgrounds/purple.png"));
+		private static Texture backgroundBlue = new Texture(Gdx.files.internal("Backgrounds/blue.png"));
+		private static Texture title = new Texture(Gdx.files.internal("PNG/title.png"));
+		private static Texture startButton = new Texture(Gdx.files.internal("PNG/Buttons/startButton.png"));
+		private static Texture scoreButton = new Texture(Gdx.files.internal("PNG/Buttons/scoreButton.png"));
+		
 		
 		private static Texture playerShipBlue1 = new Texture(Gdx.files.internal("PNG/playerShip1_blue.png"));
 		private static Texture playerShipBlue2 = new Texture(Gdx.files.internal("PNG/playerShip2_blue.png"));
@@ -43,6 +52,30 @@ public class Resources {
 		}
 		public static void setBackground(Texture background) {
 			Textures.background = background;
+		}
+		public static Texture getBackgroundBlue() {
+			return backgroundBlue;
+		}
+		public static void setBackgroundBlue(Texture backgroundBlue) {
+			Textures.backgroundBlue = backgroundBlue;
+		}
+		public static Texture getTitle() {
+			return title;
+		}
+		public static void setTitle(Texture title) {
+			Textures.title = title;
+		}
+		public static Texture getStartButton() {
+			return startButton;
+		}
+		public static void setStartButton(Texture startButton) {
+			Textures.startButton = startButton;
+		}
+		public static Texture getScoreButton() {
+			return scoreButton;
+		}
+		public static void setScoreButton(Texture scoreButton) {
+			Textures.scoreButton = scoreButton;
 		}
 		public static Texture getPlayerShipBlue1() {
 			return playerShipBlue1;
@@ -204,6 +237,7 @@ public class Resources {
 		
 		private static Music intro = Gdx.audio.newMusic(Gdx.files.internal("Sounds/intro.ogg"));
 		private static Music level = Gdx.audio.newMusic(Gdx.files.internal("Sounds/level1.ogg"));
+		private static Music scoreStateMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/credits.ogg"));
 		private static Sound shotSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_laser2.ogg"));
 		private static Sound pickUp = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_pickedUp.ogg"));
 		private static Sound lostHealth = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_lose.ogg"));
@@ -221,6 +255,12 @@ public class Resources {
 		}
 		public static void setLevel(Music level) {
 			Sounds.level = level;
+		}
+		public static Music getScoreStateMusic() {
+			return scoreStateMusic;
+		}
+		public static void setScoreStateMusic(Music scoreStateMusic) {
+			Sounds.scoreStateMusic = scoreStateMusic;
 		}
 		public static Sound getShotSound() {
 			return shotSound;
@@ -246,17 +286,5 @@ public class Resources {
 		public static void setMeteorExplosion(Sound meteorExplosion) {
 			Sounds.meteorExplosion = meteorExplosion;
 		}
-		
 	}
-	
-	
-	
-	public static class Fonts{
-		
-
-		
-		
-	}
-	
-
 }

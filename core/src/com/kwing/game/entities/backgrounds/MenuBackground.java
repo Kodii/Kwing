@@ -1,9 +1,9 @@
 package com.kwing.game.entities.backgrounds;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.kwing.game.entities.Resources;
 import com.kwing.game.main.Game;
 
 public class MenuBackground {
@@ -14,7 +14,7 @@ public class MenuBackground {
 	private int speed = 100;
 
 	public MenuBackground() {
-		textureRegion = new TextureRegion(new Texture("Backgrounds/purple.png"));
+		textureRegion = new TextureRegion(Resources.Textures.getBackground());
 		textureRegionBounds1 = new Rectangle(0 - Game.V_WIDTH / 2, 0,
 				Game.V_WIDTH, Game.V_HEIGHT);
 		textureRegionBounds2 = new Rectangle(Game.V_WIDTH / 2, 0, Game.V_WIDTH,
