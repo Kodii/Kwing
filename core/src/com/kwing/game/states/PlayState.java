@@ -95,7 +95,7 @@ public class PlayState extends GameState {
 	public void update(float dt) {
 		background.update(dt);
 	
-		if(start && player.getLives() >= 0){
+		if(start && player.getLives() > 0){
 			player.update(dt);
 			hud.update(dt);
 			
@@ -166,9 +166,15 @@ public class PlayState extends GameState {
 				}
 			}
 		}
+		
+		if(player.getLives() == 0){
+			Resources.Sounds.getLevel().stop();
+			gameStateManager.addState(GameStateManager.SCORESTATE, player);
+			gameStateManager.setState(GameStateManager.SCORESTATE);
+		}
 		 
 	}
-
+	
 	@Override
 	public void render() {
 		background.render(spriteBatch);

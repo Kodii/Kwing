@@ -14,6 +14,7 @@ public class Resources {
 		public static final int SHIP_BLUE3 = 3;*/
 		
 		private static Texture background = new Texture(Gdx.files.internal("Backgrounds/purple.png"));
+		private static Texture backgroundBlue = new Texture(Gdx.files.internal("Backgrounds/blue.png"));
 		
 		private static Texture playerShipBlue1 = new Texture(Gdx.files.internal("PNG/playerShip1_blue.png"));
 		private static Texture playerShipBlue2 = new Texture(Gdx.files.internal("PNG/playerShip2_blue.png"));
@@ -43,6 +44,12 @@ public class Resources {
 		}
 		public static void setBackground(Texture background) {
 			Textures.background = background;
+		}
+		public static Texture getBackgroundBlue() {
+			return backgroundBlue;
+		}
+		public static void setBackgroundBlue(Texture backgroundBlue) {
+			Textures.backgroundBlue = backgroundBlue;
 		}
 		public static Texture getPlayerShipBlue1() {
 			return playerShipBlue1;
