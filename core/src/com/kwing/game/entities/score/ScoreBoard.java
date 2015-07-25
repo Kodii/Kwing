@@ -70,24 +70,6 @@ public class ScoreBoard {
 				}
 			}
 		}
-		
-//		 Score temp;
-//	        if (scoreList.size()>1) // check if the number of orders is larger than 1
-//	        {
-//	            for (int x=0; x<scoreList.size(); x++) // bubble sort outer loop
-//	            {
-//	                for (int i=0; i < scoreList.size()-i; i++) {
-//	                	if(Integer.parseInt(scoreList.get(i).getScore()) 
-//	    						< Integer.parseInt(scoreList.get(i + 1).getScore()))
-//	                    {
-//	                        temp = scoreList.get(i);
-//	                        scoreList.set(i,scoreList.get(i+1) );
-//	                        scoreList.set(i+1, temp);
-//	                    }
-//	                }
-//	            }
-//	        }
-		
 	}
 	
 	private BitmapFont generateFont(int fontSize){
