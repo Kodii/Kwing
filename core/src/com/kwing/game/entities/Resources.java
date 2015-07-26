@@ -18,6 +18,7 @@ public class Resources {
 		private static Texture title = new Texture(Gdx.files.internal("PNG/title.png"));
 		private static Texture startButton = new Texture(Gdx.files.internal("PNG/Buttons/startButton.png"));
 		private static Texture scoreButton = new Texture(Gdx.files.internal("PNG/Buttons/scoreButton.png"));
+		private static Texture authorButton = new Texture(Gdx.files.internal("PNG/Buttons/authorButton.png"));
 		
 		private static Texture playerShipBlue1 = new Texture(Gdx.files.internal("PNG/playerShip1_blue.png"));
 		private static Texture playerShipBlue2 = new Texture(Gdx.files.internal("PNG/playerShip2_blue.png"));
@@ -73,6 +74,12 @@ public class Resources {
 		}
 		public static void setScoreButton(Texture scoreButton) {
 			Textures.scoreButton = scoreButton;
+		}
+		public static Texture getAuthorButton() {
+			return authorButton;
+		}
+		public static void setAuthorButton(Texture authorButton) {
+			Textures.authorButton = authorButton;
 		}
 		public static Texture getPlayerShipBlue1() {
 			return playerShipBlue1;
