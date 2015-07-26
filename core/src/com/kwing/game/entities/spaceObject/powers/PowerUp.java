@@ -4,15 +4,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.spaceObject.meteors.Meteor;
+import com.kwing.game.main.Game;
 
 public class PowerUp extends PowerObject{
 	
-	public static final int POWER_CHANCE = 100;
+	public static final int POWER_CHANCE = 50;
 	public static final int POWER = 5;
+	public static final int SCORE = 5;
 	
 	private static final int WIDTH = 34;
 	private static final int HEIGHT = 33;
-	private static final int SCORE = 5;
 	private static final int MOVEMENTSPEED = 75;
 	
 	private float x, y;
@@ -30,6 +31,7 @@ public class PowerUp extends PowerObject{
 		this.y = y;
 		rectangle.width = WIDTH;
 		rectangle.height = HEIGHT;
+		visible = true;
 	}
 	
 	public static boolean spawnChance(){
@@ -49,10 +51,10 @@ public class PowerUp extends PowerObject{
 		angle += 0.1;
 		if(angle > (2* Math.PI))
 			angle = 0.0;
-
-		  rectangle.x = x +(float) (Math.cos(angle) * (rectangle.width / 3) + (rectangle.width / 2));
-		  rectangle.y = y +(float) (Math.sin(angle) * (rectangle.height / 3) + (rectangle.height / 2));
-		  y -= movementSpeed * dt;
+		rectangle.x = x +(float) (Math.cos(angle) * (rectangle.width / 3) + (rectangle.width / 2));
+		rectangle.y = y +(float) (Math.sin(angle) * (rectangle.height / 3) + (rectangle.height / 2));
+		y -= movementSpeed * dt;
+		
 	}
 	
 	public void render(SpriteBatch spriteBatch){

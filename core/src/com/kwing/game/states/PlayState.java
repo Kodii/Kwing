@@ -163,6 +163,19 @@ public class PlayState extends GameState {
 						player.addScore(regenPills.get(i));
 						regenPills.remove(i);
 					}
+					//TODO fix clearing memory by visibility
+				}
+			}
+			if(powerUps.size() > 0){//TODO TUTAJ
+				for(int i = 0; i < powerUps.size(); i++){
+					powerUps.get(i).update(dt);
+					
+					if(Collision.checkPlayerTouchedPowerUp(player, powerUps.get(i))){
+						player.addPower(powerUps.get(i));
+						player.addScore(powerUps.get(i));
+						powerUps.remove(i);
+					}
+					//TODO fix clearing memory by visibility
 				}
 			}
 		}
@@ -170,6 +183,7 @@ public class PlayState extends GameState {
 			meteors.clear();
 			projectiles.clear();
 			regenPills.clear();
+			powerUps.clear();
 			delayTime += 1;
 			if (Gdx.input.isTouched()) {
 				if (delayTime > 50){
@@ -204,6 +218,9 @@ public class PlayState extends GameState {
 			}
 			for(int i = 0; i < regenPills.size(); i++){
 				regenPills.get(i).render(spriteBatch);
+			}
+			for(int i = 0; i < powerUps.size(); i++){
+				powerUps.get(i).render(spriteBatch);
 			}
 			player.render(spriteBatch);	
 			for(int i = 0; i < projectiles.size(); i++){
