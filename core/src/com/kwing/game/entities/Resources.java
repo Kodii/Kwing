@@ -13,16 +13,12 @@ public class Resources {
 	
 	public static class Textures{
 		
-/*		public static final int SHIP_BLUE1 = 1;
-		public static final int SHIP_BLUE2 = 2;
-		public static final int SHIP_BLUE3 = 3;*/
-		
 		private static Texture background = new Texture(Gdx.files.internal("Backgrounds/purple.png"));
 		private static Texture backgroundBlue = new Texture(Gdx.files.internal("Backgrounds/blue.png"));
 		private static Texture title = new Texture(Gdx.files.internal("PNG/title.png"));
 		private static Texture startButton = new Texture(Gdx.files.internal("PNG/Buttons/startButton.png"));
 		private static Texture scoreButton = new Texture(Gdx.files.internal("PNG/Buttons/scoreButton.png"));
-		
+		private static Texture authorButton = new Texture(Gdx.files.internal("PNG/Buttons/authorButton.png"));
 		
 		private static Texture playerShipBlue1 = new Texture(Gdx.files.internal("PNG/playerShip1_blue.png"));
 		private static Texture playerShipBlue2 = new Texture(Gdx.files.internal("PNG/playerShip2_blue.png"));
@@ -33,6 +29,8 @@ public class Resources {
 		private static Texture pillRed = new Texture(Gdx.files.internal("PNG/Power-ups/pill_red.png"));
 		private static Texture pillYellow = new Texture(Gdx.files.internal("PNG/Power-ups/pill_yellow.png"));
 		
+		private static Texture powerUpBlueBolt = new Texture(Gdx.files.internal("PNG/Power-ups/powerupBlue_bolt.png"));
+
 		private static Texture laserBlue1 = new Texture(Gdx.files.internal("Lasers/laserBlue1.png"));
 		private static Texture laserBlue2 = new Texture(Gdx.files.internal("Lasers/laserBlue2.png"));
 		private static Texture laserBlue3 = new Texture(Gdx.files.internal("Lasers/laserBlue3.png"));
@@ -76,6 +74,12 @@ public class Resources {
 		}
 		public static void setScoreButton(Texture scoreButton) {
 			Textures.scoreButton = scoreButton;
+		}
+		public static Texture getAuthorButton() {
+			return authorButton;
+		}
+		public static void setAuthorButton(Texture authorButton) {
+			Textures.authorButton = authorButton;
 		}
 		public static Texture getPlayerShipBlue1() {
 			return playerShipBlue1;
@@ -144,6 +148,12 @@ public class Resources {
 			default:
 				return null;
 			}
+		}
+		public static Texture getPowerUpBlueBolt() {
+			return powerUpBlueBolt;
+		}
+		public static void setPowerUpBlueBolt(Texture powerUpBlueBolt) {
+			Textures.powerUpBlueBolt = powerUpBlueBolt;
 		}
 		public static Texture getLaserBlue1() {
 			return laserBlue1;

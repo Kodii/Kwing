@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.spaceObject.meteors.Meteor;
+import com.kwing.game.main.Game;
 
 public class RegenPill extends PowerObject{
 	
-	public static final int PILL_CHANCE = 100; // percent chance of getting pill
+	public static final int PILL_CHANCE = 50; // percent chance of getting pill
 	private static final int WIDTH = 22;
 	private static final int HEIGHT = 21;
 	private static final int POWER = 7;
@@ -20,7 +21,7 @@ public class RegenPill extends PowerObject{
 	private int score;
 	
 	double angle;
-
+	
 	public RegenPill(Rectangle rectangle, int type){
 		this.rectangle = rectangle;
 		movementSpeed = MOVEMENTSPEED;
@@ -35,6 +36,7 @@ public class RegenPill extends PowerObject{
 		rectangle.height = HEIGHT;
 		power = POWER * type;
 		score = SCORE * type;
+		visible = true;
 	}
 	
 	public void update(float dt){
@@ -42,9 +44,10 @@ public class RegenPill extends PowerObject{
 		if(angle > (2* Math.PI))
 			angle = 0.0;
 
-		  rectangle.x = x +(float) (Math.cos(angle) * (rectangle.width / 3) + (rectangle.width / 2));
-		  rectangle.y = y +(float) (Math.sin(angle) * (rectangle.height / 3) + (rectangle.height / 2));
-		  y -= movementSpeed * dt;
+		rectangle.x = x +(float) (Math.cos(angle) * (rectangle.width / 3) + (rectangle.width / 2));
+		rectangle.y = y +(float) (Math.sin(angle) * (rectangle.height / 3) + (rectangle.height / 2));
+		y -= movementSpeed * dt;
+		  
 	}
 	
 	public void render(SpriteBatch sb){
@@ -53,7 +56,7 @@ public class RegenPill extends PowerObject{
 		sb.end();
 	}
 	
-	public static Boolean spawnChance(){
+	public static boolean spawnChance(){
 		boolean statement;
 		if(Math.random() * 100 < PILL_CHANCE)
 			statement = true;

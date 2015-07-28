@@ -24,10 +24,14 @@ public class Menu {
 	private Texture scoreTexture;
 	private Rectangle scoreRectangle;
 	
+	private Texture authorTexture;
+	private Rectangle authorRectangle;
+	
 	private Vector3 touchPos;
 	private OrthographicCamera cam;
-
+	
 	private int state;
+	private int delay = 0;
 	
 	public Menu(OrthographicCamera cam) {
 
@@ -57,6 +61,12 @@ public class Menu {
 		scoreRectangle.x = Game.V_WIDTH / 2 - startRectangle.width / 2;
 		scoreRectangle.y = startRectangle.y - scoreRectangle.height - 20;
 
+		authorTexture = Resources.Textures.getAuthorButton();
+		authorRectangle = new Rectangle();
+		authorRectangle.width = 200;
+		authorRectangle.height = 78;
+		authorRectangle.x = Game.V_WIDTH / 2 - startRectangle.width / 2;
+		authorRectangle.y = scoreRectangle.y - authorRectangle.height - 20;
 	}
 
 	public void update(float dt) {
@@ -80,6 +90,17 @@ public class Menu {
 					&& touchPos.y < (scoreRectangle.y + scoreRectangle.height)) {
 				state = GameStateManager.SCORESTATE;
 			}
+			
+			delay++;
+			if(delay > 2){
+				if (touchPos.x > authorRectangle.x
+						&& touchPos.x < (authorRectangle.x + authorRectangle.width)
+						&& touchPos.y > (authorRectangle.y)
+						&& touchPos.y < (authorRectangle.y + authorRectangle.height)) {
+					Gdx.net.openURI("https://www.facebook.com/xKodi");
+					delay = 0;
+				}
+			}
 		}
 	}
 
@@ -92,6 +113,8 @@ public class Menu {
 				startRectangle.height);
 		sb.draw(scoreTexture, scoreRectangle.x, scoreRectangle.y, scoreRectangle.width,
 				scoreRectangle.height);
+		sb.draw(authorTexture, authorRectangle.x, authorRectangle.y, authorRectangle.width,
+				authorRectangle.height);
 		
 		sb.end();
 

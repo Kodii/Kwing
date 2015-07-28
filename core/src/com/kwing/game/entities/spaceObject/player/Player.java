@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.spaceObject.meteors.Meteor;
+import com.kwing.game.entities.spaceObject.powers.PowerUp;
 import com.kwing.game.entities.spaceObject.powers.RegenPill;
 import com.kwing.game.entities.spaceObject.projectile.Projectile;
 import com.kwing.game.entities.spaceObject.ships.Ship;
@@ -17,9 +18,10 @@ public class Player extends PlayerObject {
 	
 	public static final int MOVEMENTSPEED = 250;
 	public static final int HEALTH = 100;
-	public static final int LIVES = 0;
+	public static final int LIVES = 1;
 	public static final int SCORE = 0;
 	public static final int POWER = 20;
+	public static final int MAX_POWER = 100;
 	
 	private Ship ship;
 	private Projectile projectile;
@@ -151,11 +153,23 @@ public class Player extends PlayerObject {
 		score += regenPill.getScore();
 	}
 	
+	public void addScore(PowerUp powerUp){
+		score += PowerUp.SCORE;
+	}
+	
 	public void addHealth(RegenPill regenPill){
 		if(health < HEALTH)
 			health += regenPill.getPower();
 		if(health >= HEALTH)
 			health = HEALTH;
+		pickedUp = true;
+	}
+	
+	public void addPower(PowerUp powerUp){
+		if(power < MAX_POWER)
+			power += PowerUp.POWER;
+		if(power >= MAX_POWER)
+			power = MAX_POWER;
 		pickedUp = true;
 	}
 

@@ -34,14 +34,27 @@ public class Meteor extends MeteorObject{
 		rectangle = new Rectangle();
 		texture = Resources.Textures.getMeteorBrownBig(type);
 		
-		if(player.getScore() > 1000)
+		movementSpeed = MOVEMENTSPEED;
+		//TODO fix balance
+		if(player.getPower() > 35 && player.getPower() <= 50){
 			factor = 2;
-		else if(player.getScore() > 4000)
+			movementSpeed = 110;
+		}
+		else if(player.getPower() > 50 && player.getPower() <= 70){
 			factor = 3;
+			movementSpeed = 125;
+		}
+		else if(player.getPower() > 70 && player.getPower() <= 90){
+			factor = 5;
+			movementSpeed = 140;
+		}
+		else if(player.getPower() > 90){
+			factor = 6;
+			movementSpeed = 150;
+		}
 		else
 			factor = 1;
 		destroyed = false;
-		movementSpeed = MOVEMENTSPEED;
 		width = WIDTH;
 		height = HEIGHT;
 		health = HEALTH * factor;
@@ -80,7 +93,7 @@ public class Meteor extends MeteorObject{
 			Resources.Sounds.getMeteorExplosion().play();
 	}
 	
-	private Boolean checkDownwardBound(){
+	private boolean checkDownwardBound(){
 		if(rectangle.y < 0 - rectangle.height)
 			visible = false;
 		else
@@ -102,12 +115,12 @@ public class Meteor extends MeteorObject{
 	private void reduceMeteorToSmaller(){
 		if(lives == 2){
 			texture = Resources.Textures.getMeteorBrownMedium();
-			health = HEALTH * factor - 40 * factor;
+			health = HEALTH * factor - 30 * factor;
 			score += (SCORE + 10) * factor;
 		}
 		if(lives == 1){
 			texture = Resources.Textures.getMeteorBrownSmall();
-			health = HEALTH * factor - 60 * factor;
+			health = HEALTH * factor - 50 * factor;
 			score += (SCORE + 20) * factor;
 		}
 		rectangle.width = rectangle.width / 2;

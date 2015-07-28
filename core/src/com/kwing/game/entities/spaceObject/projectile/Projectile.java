@@ -4,10 +4,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
-import com.kwing.game.entities.spaceObject.SpaceObject;
 import com.kwing.game.entities.spaceObject.player.Player;
 import com.kwing.game.entities.spaceObject.powers.PowerObject;
-import com.kwing.game.entities.spaceObject.ships.Ship;
 import com.kwing.game.main.Game;
 
 public class Projectile extends PowerObject{
@@ -34,9 +32,17 @@ public class Projectile extends PowerObject{
 		power = player.getPower();
 		
 		if(player.getPower() <= 20)
-			setTexture(Resources.Textures.getLaserBlue1());
-		else if(player.getPower() > 20 && player.getPower() <= 60)
-			setTexture(Resources.Textures.getLaserBlue2());
+			texture = Resources.Textures.getLaserBlue1();
+		else if(player.getPower() > 20 && player.getPower() <= 35)
+			texture = Resources.Textures.getLaserBlue2();
+		else if(player.getPower() > 35 && player.getPower() <= 50)
+			texture = Resources.Textures.getLaserBlue3();
+		else if(player.getPower() > 50 && player.getPower() <= 65)
+			texture = Resources.Textures.getLaserBlue4();
+		else if(player.getPower() > 65 && player.getPower() <= 80)
+			texture = Resources.Textures.getLaserBlue5();
+		else if(player.getPower() > 80)
+			texture = Resources.Textures.getLaserBlue6();
 			
 		
 		rectangle = new Rectangle();
