@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Kordian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.0/b7ac8e495b4e4828a30fa97654a17bdfb9f93734/gdx-1.6.0.jar" sourcepath="C:/Users/Kordian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.0/67906739c5b297a8254c2f591395183c6d0de539/gdx-1.6.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Kordian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.0/2ea60958fc2ee0c519583fcd1fbda39175665d33/gdx-freetype-1.6.0.jar" sourcepath="C:/Users/Kordian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.0/72d972d74cf129d38e40686c3239958a3f4dac9f/gdx-freetype-1.6.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kordian/git/Kwing1/core/libs/gdx-sqlite.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
 	<classpathentry kind="output" path="bin"/>
+	<classpathentry sourcepath="C:/Users/kordi/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.0/67906739c5b297a8254c2f591395183c6d0de539/gdx-1.6.0-sources.jar" kind="lib" path="C:/Users/kordi/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.0/b7ac8e495b4e4828a30fa97654a17bdfb9f93734/gdx-1.6.0.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/kordi/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.0/72d972d74cf129d38e40686c3239958a3f4dac9f/gdx-freetype-1.6.0-sources.jar" kind="lib" path="C:/Users/kordi/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.0/2ea60958fc2ee0c519583fcd1fbda39175665d33/gdx-freetype-1.6.0.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/kordi/git/Kwing/core/libs/gdx-sqlite.jar" exported="true"/>
 </classpath>

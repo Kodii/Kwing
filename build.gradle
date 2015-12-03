@@ -38,12 +38,13 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+		runtime fileTree(dir: 'libs', include: '*.jar')    
     }
 }
 
 project(":android") {
     apply plugin: "android"
-
+    
     configurations { natives }
 
     dependencies {
@@ -56,6 +57,7 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
+		compile files( 'libs/gdx-sqlite.jar', 'libs/gdx-sqlite-android.jar' )
     }
 }
 
@@ -66,6 +68,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        runtime fileTree(dir: 'libs', include: '*.jar')
     }
 }
 
