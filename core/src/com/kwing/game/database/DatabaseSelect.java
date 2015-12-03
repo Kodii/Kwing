@@ -7,8 +7,6 @@ import com.badlogic.gdx.sql.Database;
 import com.badlogic.gdx.sql.DatabaseCursor;
 import com.badlogic.gdx.sql.SQLiteGdxException;
 
-import javafx.scene.chart.PieChart.Data;
-
 public class DatabaseSelect {
 	
 	private static Database dbHandler;
@@ -59,7 +57,7 @@ public class DatabaseSelect {
 		return rowId;
 	}
 	
-	public static HashMap getScoreById(int scoreId){
+	public static HashMap<String, String> getScoreById(int scoreId){
 		DatabaseCursor cursor = null;
 		HashMap<String, String> score = new HashMap<String, String>();
 		String scoreIdString = Integer.toString(scoreId);

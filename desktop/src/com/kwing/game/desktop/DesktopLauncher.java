@@ -1,7 +1,5 @@
 package com.kwing.game.desktop;
 
-import org.lwjgl.opengl.Display;
-
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.kwing.game.main.Game;

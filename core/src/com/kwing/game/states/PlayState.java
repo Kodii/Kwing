@@ -24,7 +24,6 @@ public class PlayState extends GameState {
 	
 	private PlayBackground background;
 	private Player player;
-	private Projectile projectile;
 	private Ship ship;
 	private Meteor meteor;
 	private Hud hud;
@@ -44,7 +43,6 @@ public class PlayState extends GameState {
 	private boolean start;
 	private int delayTime;
 	private int spawnTime;
-	private int randomPillType;
 	// TODO SKONCZYLEM NA USTAWIANIU FACTORA W KLASIE METEOR, TERAZ TRZEBA DOROBIC
 	// POZIOMY MOCY.
 	public PlayState(GameStateManager gameStateManager){

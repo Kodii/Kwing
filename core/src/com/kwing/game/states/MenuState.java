@@ -1,8 +1,6 @@
 package com.kwing.game.states;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.backgrounds.MenuBackground;
 import com.kwing.game.entities.menu.Menu;

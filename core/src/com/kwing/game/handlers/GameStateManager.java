@@ -25,7 +25,6 @@ public class GameStateManager {
 	private Game game;
 	private Ship ship;
 	private Player player;
-	private int delay = 0;
 
 	public GameStateManager(Game game) {
 		this.game = game;

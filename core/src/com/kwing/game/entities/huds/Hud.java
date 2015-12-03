@@ -7,14 +7,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.kwing.game.entities.spaceObject.player.Player;
-import com.kwing.game.entities.spaceObject.projectile.Projectile;
-import com.kwing.game.entities.spaceObject.ships.Ship;
 import com.kwing.game.main.Game;
 
 public class Hud {
 	
 	private Player player;
-	private Projectile projectile;
 	private BitmapFont font18, font32;
 	
 	private int healthX, healthY;

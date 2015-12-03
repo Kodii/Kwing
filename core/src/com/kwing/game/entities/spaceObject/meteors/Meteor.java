@@ -19,17 +19,14 @@ public class Meteor extends MeteorObject{
 	public static final int SCORE = 10;
 	
 	private Random random;
-	private Player player;
 	
 	private int factor;
-	private int type;
 	private boolean destroyed;
 	private boolean left, right;
 	private boolean visible;
 	private boolean anihilated;
 	
 	public Meteor(int type, Player player){
-		this.type = type;
 		random = new Random();
 		rectangle = new Rectangle();
 		texture = Resources.Textures.getMeteorBrownBig(type);

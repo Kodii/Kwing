@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.kwing.game.entities.Resources;
 import com.kwing.game.entities.spaceObject.meteors.Meteor;
-import com.kwing.game.main.Game;
 
 public class PowerUp extends PowerObject{
 	

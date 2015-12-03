@@ -23,7 +23,6 @@ public class Player extends PlayerObject {
 	public static final int POWER = 20;
 	public static final int MAX_POWER = 100;
 	
-	private Ship ship;
 	private Projectile projectile;
 	private Vector3 touchPosition;
 	
@@ -36,7 +35,6 @@ public class Player extends PlayerObject {
 
 	public Player(OrthographicCamera orthographicCamera, Ship ship) {
 		this.orthographicCamera = orthographicCamera;
-		this.ship = ship;
 		rectangle = ship.getRectangle();
 		texture = ship.getTexture();
 		touchPosition = new Vector3();
