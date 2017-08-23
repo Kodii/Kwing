@@ -1,0 +1,7 @@
+/.gradle/
+*.class
+android/build/generated/
+android/build/intermediates/
+android/assets/scores.db
+android/build/outputs/
+local.properties
